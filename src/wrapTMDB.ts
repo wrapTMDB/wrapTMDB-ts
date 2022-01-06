@@ -23,23 +23,12 @@ const Route = {
   TV: '/tv',
 };
 
-/********************functions definition********************/
+//============functions definition============
 
 /********************
  * Init: must call Init function first before using any other functions, or all func will throw errors.
  ********************/
-function Init(token: string) {
-  Common.TOKEN = token;
-}
-/********************
- * Header: Set HTTP header, it's optional, but better
- ********************/
-function SetHeader(input: any) {
-  Common.HEADER['User-Agent'] =
-    'User-Agent' in input ? input['User-Agent'] : '';
 
-  Common.HEADER['Referer'] = 'Referer' in input ? input['Referer'] : '';
-}
 /********************
  * Debug function to get TOKEN
  * @returns {string} Common.TOKEN
@@ -54,7 +43,7 @@ function GetToken() {
  * @param {string} language(optional)  Language to request
  * @returns {number} JSON
  ********************/
-class GetMovieInfo {
+class GetMovieInfos {
   async GetMovieInfo(movie_id: string): Promise<any>;
   async GetMovieInfo(movie_id: string, language: string): Promise<any>;
   async GetMovieInfo(movie_id: string, language?: string): Promise<any> {
@@ -86,11 +75,11 @@ class GetTVInfo {
     return data.data;
   }
 }
-/********************TMDB Validator********************/
+//============TMDB Validator============
 const TheMovieTMDB = new Proxy(
   {
     GetToken,
-    GetMovieInfo: new GetMovieInfo().GetMovieInfo,
+    GetMovieInfo: new GetMovieInfos().GetMovieInfo,
     GetTVInfo: new GetTVInfo().GetTVInfo,
   },
   {
@@ -107,12 +96,27 @@ const TheMovieTMDB = new Proxy(
     },*/
   }
 );
-/********************module exports********************/
+//============module exports============
 // if (typeof module !== 'undefined' && module.exports) {
 //     module.exports = TheMovieTMDB;
 // }
-module.exports.Init = Init;
-module.exports.SetHeader = SetHeader;
-module.exports.GetToken = TheMovieTMDB.GetToken;
-module.exports.GetMovieInfo = TheMovieTMDB.GetMovieInfo;
-module.exports.GetTVInfo = TheMovieTMDB.GetTVInfo;
+// module.exports.Init = Init;
+// module.exports.SetHeader = SetHeader;
+// module.exports.GetToken = TheMovieTMDB.GetToken;
+//module.exports.GetMovieInfo = TheMovieTMDB.GetMovieInfo;
+//module.exports.GetTVInfo = TheMovieTMDB.GetTVInfo;
+export function Init(token: string) {
+  Common.TOKEN = token;
+}
+
+/********************
+ * Header: Set HTTP header, it's optional, but better
+ ********************/
+export function SetHessader(input: any) {
+  // Common.HEADER['User-Agent'] =
+  //   'User-Agent' in input ? input['User-Agent'] : '';
+  // Common.HEADER['Referer'] = 'Referer' in input ? input['Referer'] : '';
+}
+export function GetMovieInfo(...parms: any) {
+  return TheMovieTMDB.GetMovieInfo(...parms);
+}
