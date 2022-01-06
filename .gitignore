@@ -102,3 +102,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+#eslint
+build/
+src/index.ts
+
+#ignore debug entry point
+/build/index.*
+/build/index.d.ts
+/build/index.js
+/build/index.js.map

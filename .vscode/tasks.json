@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "fix",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: fix",
+			"detail": "tsc"
+		},
+		{
+			"type": "typescript",
+			"tsconfig": "tsconfig.json",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build",
+			"label": "tsc: build - tsconfig.json"
+		},
+		{
+			"label": "dev",
+			"dependsOrder": "sequence",
+			"dependsOn": ["tsc: build - tsconfig.json"]
+		},
+
+	]
+}
