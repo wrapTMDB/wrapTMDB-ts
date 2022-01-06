@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${file}",
+            "preLaunchTask": "tsc: 建置 - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/build/**/*.js"
+            ]
+        }
+    ]
+}
