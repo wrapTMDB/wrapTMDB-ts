@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * The MIT License (MIT)
  *
@@ -7,86 +6,24 @@
  * https://github.com/wrapTMDB/wrapTMDB-ts
  *
  */
-const axios = require('axios');
-const header = {
-  'User-Agent': '',
-  Referer: '',
-};
-const Common = {
-  TOKEN: '',
-  BASE_URL: 'https://api.themoviedb.org/3',
-  HEADER: header,
-};
-
-const Route = {
-  MOVIE: '/movie',
-  TV: '/tv',
-};
-
-//============functions definition============
-
-/********************
- * Init: must call Init function first before using any other functions, or all func will throw errors.
- ********************/
-
-/********************
- * Debug function to get TOKEN
- * @returns {string} Common.TOKEN
- ********************/
-function GetToken() {
-  return Common.TOKEN;
-}
-
-/********************
- * REST Get Movie infomation
- * @param {number} movie_id  Movie ID in TMDB
- * @param {string} language(optional)  Language to request
- * @returns {number} JSON
- ********************/
-class GetMovieInfos {
-  async GetMovieInfo(movie_id: string): Promise<any>;
-  async GetMovieInfo(movie_id: string, language: string): Promise<any>;
-  async GetMovieInfo(movie_id: string, language?: string): Promise<any> {
-    const url: string = Common.BASE_URL + Route.MOVIE + '/' + movie_id;
-    let targetURL: string = url + `?api_key=${Common.TOKEN}`;
-    if (language !== undefined) {
-      targetURL += `&language=${language}`;
-    }
-    const data: any = await axios.get(targetURL, Common.HEADER);
-    return data.data;
-  }
-}
-/********************
- * REST Get Series/TV infomation
- * @param {number} tv_id  Series/TV ID in TMDB
- * @param {string} language(optional)  Language to request
- * @returns {number} JSON
- ********************/
-class GetTVInfo {
-  async GetTVInfo(tv_id: string): Promise<any>;
-  async GetTVInfo(tv_id: string, language: string): Promise<any>;
-  async GetTVInfo(tv_id: string, language?: string): Promise<any> {
-    const url: string = Common.BASE_URL + Route.TV + '/' + tv_id;
-    let targetURL: string = url + `?api_key=${Common.TOKEN}`;
-    if (language !== undefined) {
-      targetURL += `&language=${language}`;
-    }
-    const data: any = await axios.get(targetURL, Common.HEADER);
-    return data.data;
-  }
-}
-//============TMDB Validator============
-const TheMovieTMDB = new Proxy(
+import * as movie_module from './movie';
+import * as tv_module from './tv';
+import * as c_module from './common';
+//============Validator (function decorator)============
+const movie_entry = new movie_module.MovieInfos();
+const tv_entry = new tv_module.TVInfos();
+const Validator = new Proxy(
   {
     GetToken,
-    GetMovieInfo: new GetMovieInfos().GetMovieInfo,
-    GetTVInfo: new GetTVInfo().GetTVInfo,
+    GetMovieDetails: movie_entry.GetDetails,
+    DeleteMovieRating: movie_entry.DeleteRating,
+    GetTVDetails: tv_entry.GetDetails,
   },
   {
     get: function (obj: any, props: any) {
       return function (...params: any) {
-        if (Common.TOKEN === '') {
-          throw 'No TOKEN';
+        if (c_module.GetToken() === '') {
+          throw 'NONE TOKEN, please call "Init" function at first before calling other functions';
         }
         return obj[props].apply(null, params);
       };
@@ -96,27 +33,72 @@ const TheMovieTMDB = new Proxy(
     },*/
   }
 );
-//============module exports============
-// if (typeof module !== 'undefined' && module.exports) {
-//     module.exports = TheMovieTMDB;
-// }
-// module.exports.Init = Init;
-// module.exports.SetHeader = SetHeader;
-// module.exports.GetToken = TheMovieTMDB.GetToken;
-//module.exports.GetMovieInfo = TheMovieTMDB.GetMovieInfo;
-//module.exports.GetTVInfo = TheMovieTMDB.GetTVInfo;
-export function Init(token: string) {
-  Common.TOKEN = token;
+
+//============functions definition============
+
+/********************
+ * Debug: get TOKEN
+ * @returns {string} Common.TOKEN
+ ********************/
+function GetToken(): string {
+  return c_module.GetToken();
 }
 
 /********************
- * Header: Set HTTP header, it's optional, but better
+ * Init: must call Init function first before using any other functions, or all func throw errors.
+ * @param {string}token  enter your_token
  ********************/
-export function SetHessader(input: any) {
-  // Common.HEADER['User-Agent'] =
-  //   'User-Agent' in input ? input['User-Agent'] : '';
-  // Common.HEADER['Referer'] = 'Referer' in input ? input['Referer'] : '';
+export function Init(token: string) {
+  c_module.SetToken(token);
 }
-export function GetMovieInfo(...parms: any) {
-  return TheMovieTMDB.GetMovieInfo(...parms);
+
+/********************
+ * Header: Set HTTP header, it's optional, but should have it.
+ * @param {string} header object
+ * @example
+ * {
+      'User-Agent': 'npm package-dev',
+      Referer: 'wraptmdb-ts',
+  }
+ ********************/
+export function SetHeader(input: any) {
+  c_module.SetHeader(input);
+}
+
+export namespace MOVIE {
+  /********************
+   * 1.Get the primary information about a movie.
+   * @param {number|string} movie_id  Movie_ID for TMDB
+   * @param {string} language(optional)  Language to request
+   * @example wraptmdb.MOVIE.GetDetails(624860);
+   *          wraptmdb.MOVIE.GetDetails(624860,'en-US');
+   ********************/
+  export function GetDetails(...parms: any) {
+    return Validator.GetMovieDetails(...parms);
+  }
+  /********************
+   * 18.Remove your rating for a movie.
+   * A valid session or guest session ID is required
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} guest_session_id
+   * @param {string} session_id
+   * @doc https://developers.themoviedb.org/3/movies/delete-movie-rating
+   *
+   ********************/
+  export function DeleteRating(...parms: any) {
+    return Validator.DeleteRating(...parms);
+  }
+}
+
+export namespace TV {
+  /********************
+   * 1.Get the primary information about a movie.
+   * @param {number|string} movie_id  Movie_ID for TMDB
+   * @param {string} language(optional)  Language to request
+   * @example wraptmdb.MOVIE.GetDetails(624860);
+   *          wraptmdb.MOVIE.GetDetails(624860,'en-US');
+   ********************/
+  export function GetDetails(...parms: any) {
+    return Validator.GetTVDetails(...parms);
+  }
 }
