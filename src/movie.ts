@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const axios = require('axios');
 import * as c_module from './common';
-
+const baseURL = c_module.GetURL();
+const token = c_module.GetToken();
+const header = c_module.GetHeader();
 /********************
  *
  * @param
@@ -10,17 +12,16 @@ import * as c_module from './common';
 
 export class MovieInfos {
   /********************
-   * 1.Get the primary information about a movie.
+   * 1.GET /movie/{movie_id}
+   * @description Get the primary information about a movie.
    * @param {number} movie_id  Movie ID in TMDB
    * @param {string} language(optional)  Language to request
    * @returns {number} JSON
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-details
    ********************/
   async GetDetails(movie_id: string): Promise<any>;
   async GetDetails(movie_id: string, language: string): Promise<any>;
   async GetDetails(movie_id: string, language?: string): Promise<any> {
-    const baseURL = c_module.GetURL();
-    const token = c_module.GetToken();
-    const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.MOVIE + '/' + movie_id + `?api_key=${token}`;
 
@@ -30,21 +31,444 @@ export class MovieInfos {
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
-
   /********************
-   * 18.Remove your rating for a movie.
-   * A valid session or guest session ID is required
+   * 2.GET /movie/{movie_id}/account_states
+   * @description Grab the following account states for a session:
+      ‧Movie rating
+      ‧If it belongs to your watchlist
+      ‧If it belongs to your favourite list
    * @param {number|string} movie_id  Movie ID in TMDB
-   * @param {string} guest_session_id
    * @param {string} session_id
-   * @doc https://developers.themoviedb.org/3/movies/delete-movie-rating
+   * @param {string} guest_session_id (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-account-states
    ********************/
-  async DeleteRating(movie_id: string, session_id: string): Promise<any>;
-  async DeleteRating(
+  async GetAccountStates(movie_id: string, session_id: string): Promise<any>;
+  async GetAccountStates(
     movie_id: string,
     session_id: string,
     guest_session_id: string
   ): Promise<any>;
+  async GetAccountStates(
+    movie_id: string,
+    session_id: string,
+    guest_session_id?: string
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/account_states' +
+      `?api_key=${token}`;
+    if (guest_session_id !== '' || guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${session_id}`;
+    if (session_id !== '' || session_id !== undefined)
+      targetURL += `&session_id=${session_id}`;
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   * 3.GET /movie/{movie_id}/alternative_titles
+   * @description Get all of the alternative titles for a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {number|string} country
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-alternative-titles
+   ********************/
+  async GetAlternativetitles(movie_id: string): Promise<any>;
+  async GetAlternativetitles(movie_id: string, country?: string): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/alternative_titles' +
+      `?api_key=${token}`;
+    if (country !== '' || country !== undefined)
+      targetURL += `&country=${country}`;
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   * 4.GET /movie/{movie_id}/changes
+   * @description Get the changes for a movie. By default only the last 24 hours are returned.
+   * You can query up to 14 days in a single query by using the start_date and end_date query parameters.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {number|string} start_date (optional)
+   * @param {number|string} end_date (optional)
+   * @param {number} page (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
+   ********************/
+  async GetChanges(movie_id: string): Promise<any>;
+  async GetChanges(
+    movie_id: string,
+    start_date: string,
+    end_date: string
+  ): Promise<any>;
+  async GetChanges(
+    movie_id: string,
+    start_date?: string,
+    end_date?: string,
+    page?: number
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/changes' +
+      `?api_key=${token}`;
+    if (start_date !== '' || start_date !== undefined)
+      targetURL += `&start_date=${start_date}`;
+    if (end_date !== '' || end_date !== undefined)
+      targetURL += `&end_date=${start_date}`;
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+
+  /********************
+   * 5.GET /movie/{movie_id}/credits
+   * @description Get the cast and crew for a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language(optional)  Language to request
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
+   ********************/
+  async GetCredits(movie_id: string): Promise<any>;
+  async GetCredits(movie_id: string, language?: string): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/credits' +
+      `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   * 6.GET /movie/{movie_id}/external_ids
+   * @description Get the external ids for a movie. We currently support the following external sources.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-external-ids
+   ********************/
+  async GetExternalIDs(movie_id: string): Promise<any> {
+    const targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/external_ids' +
+      `?api_key=${token}`;
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+
+  /********************
+   * 7.GET /movie/{movie_id}/images
+   * @description Querying images with a language parameter will filter the results.
+   * If you want to include a fallback language (especially useful for backdrops)
+   * you can use the include_image_language parameter.
+   * This should be a comma seperated value like so: include_image_language=en,null.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language (optional)
+   * @param {string} include_image_language (optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-images
+   ********************/
+  async GetImage(movie_id: string): Promise<any>;
+  async GetImage(movie_id: string, language: string): Promise<any>;
+  async GetImage(
+    movie_id: string,
+    language: string,
+    include_image_language: string
+  ): Promise<any>;
+  async GetImage(
+    movie_id: string,
+    language?: string,
+    include_image_language?: string
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/images' +
+      `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (include_image_language !== undefined) {
+      targetURL += `&include_image_language=${include_image_language}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+
+  /********************
+   * 8.GET /movie/{movie_id}/keywords
+   * @description Get the keywords that have been added to a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-keywords
+   ********************/
+  async GetKeywords(movie_id: string): Promise<any> {
+    const targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/keywords' +
+      `?api_key=${token}`;
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+
+  /********************
+   * 9.GET /movie/{movie_id}/lists
+   * @description Get a list of lists that this movie belongs to.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language(optional)  Language to request
+   * @param {number} page (optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-lists
+   ********************/
+  async GetLists(movie_id: string): Promise<any>;
+  async GetLists(movie_id: string, language: string): Promise<any>;
+  async GetLists(
+    movie_id: string,
+    language?: string,
+    page?: number
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/lists' +
+      `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   *10.GET /movie/{movie_id}/recommendations
+   * @description Get a list of recommended movies for a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-recommendations
+   ********************/
+  async GetRecommendations(movie_id: string): Promise<any>;
+  async GetRecommendations(movie_id: string, language: string): Promise<any>;
+  async GetRecommendations(
+    movie_id: string,
+    language?: string,
+    page?: number
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/recommendations' +
+      `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   *11.GET /movie/{movie_id}/release_dates
+   * @description Get the release date along with the certification for a movie.
+   * Release dates support different types:
+       1.Premiere
+       2.Theatrical (limited)
+       3.Theatrical
+       4.Digital
+       5.Physical
+       6.TV
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-release-dates
+   ********************/
+  async GetReleaseDates(movie_id: string): Promise<any> {
+    const targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/release_dates' +
+      `?api_key=${token}`;
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   *12.GET /movie/{movie_id}/reviews
+   * @description Get the user reviews for a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language(optional)  Language to request
+   * @param {number} page (optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-reviews
+   ********************/
+  async GetReviews(movie_id: string): Promise<any>;
+  async GetReviews(movie_id: string, language: string): Promise<any>;
+  async GetReviews(
+    movie_id: string,
+    language?: string,
+    page?: number
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/reviews' +
+      `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   *13.GET /movie/{movie_id}/similar
+   * @description Get a list of similar movies. This is "not" the same as the "Recommendation" system you see on the website.
+   * These items are assembled by looking at keywords and genres.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language(optional)  Language to request
+   * @param {number} page (optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-similar-movies
+   ********************/
+  async GetSimilar(movie_id: string): Promise<any>;
+  async GetSimilar(movie_id: string, language: string): Promise<any>;
+  async GetSimilar(
+    movie_id: string,
+    language?: string,
+    page?: number
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/similar' +
+      `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+
+  /********************
+   *14.GET /movie/{movie_id}/translations
+   * @description Get a list of translations that have been created for a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-translations
+   ********************/
+  async GetTranslations(movie_id: string): Promise<any> {
+    const targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/translations' +
+      `?api_key=${token}`;
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   *15.GET /movie/{movie_id}/videos
+   * @description Get the videos that have been added to a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language(optional)  Language to request
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-videos
+   ********************/
+  async GetVideos(movie_id: string): Promise<any>;
+  async GetVideos(movie_id: string, language?: string): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/videos' +
+      `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   *16.GET /movie/{movie_id}/watch/providers
+   * @description Powered by JustWatch, you can query this method to get a list of the availabilities per country by provider.
+    This is not going to return full deep links, but rather, it's just enough information to display what's available where.
+    You can link to the provided TMDB URL to help support TMDB and provide the actual deep links to the content.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-watch-providers
+   ********************/
+  async GetProviders(movie_id: string): Promise<any> {
+    const targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/watch/providers' +
+      `?api_key=${token}`;
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   *17.POST /movie/{movie_id}/rating
+   * @description Rate a movie.
+   * A valid session or guest session ID is required.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {any} query POST query
+   * @param {string} guest_session_id (optional)
+   * @param {string} session_id (optional)
+   * @doc https://developers.themoviedb.org/3/movies/rate-movie
+   * @example query {
+   *  "rate":5.0
+   * }
+   ********************/
+  async GetRating(movie_id: string, query: any): Promise<any>;
+  async GetRating(
+    movie_id: string,
+    query: any,
+    session_id?: string,
+    guest_session_id?: string
+  ): Promise<any> {
+    let targetURL: string =
+      baseURL +
+      c_module.Route.MOVIE +
+      movie_id +
+      '/rating' +
+      `?api_key=${token}`;
+    if (guest_session_id !== '' || guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${session_id}`;
+    if (session_id !== '' || session_id !== undefined)
+      targetURL += `&session_id=${session_id}`;
+    const header = {
+      api_key: token,
+    };
+
+    const data: any = await axios.POST(targetURL, query, header);
+    return data.data;
+  }
+  /********************
+   * 18.DELETE /movie/{movie_id}/rating
+   * @description Remove your rating for a movie.
+   * A valid session or guest session ID is required
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} guest_session_id (optional)
+   * @param {string} session_id (optional)
+   * @doc https://developers.themoviedb.org/3/movies/delete-movie-rating
+   ********************/
+  async DeleteRating(movie_id: string, session_id: string): Promise<any>;
   async DeleteRating(
     movie_id: string,
     session_id?: string,
@@ -65,6 +489,160 @@ export class MovieInfos {
       targetURL += `&session_id=${session_id}`;
     await axios.delete(targetURL, header);
     /*no respone*/
+  }
+  /********************
+   * 19.GET /movie/latest
+   * @description Get the most newly created movie. This is a live response and will continuously change.
+   * @param {string} language(optional)  Language to request
+   * @doc https://developers.themoviedb.org/3/movies/get-latest-movie
+   ********************/
+  async GetLatest(language?: string): Promise<any> {
+    const baseURL = c_module.GetURL();
+    const token = c_module.GetToken();
+    const header = c_module.GetHeader();
+    let targetURL: string =
+      baseURL + c_module.Route.MOVIE + '/latest' + `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   * 20.GET /movie/now_playing
+   * @description Get a list of movies in theatres.
+   * This is a release type query that looks for all movies that have a release type of 2 or 3 within the specified date range.
+   * You can optionally specify a region prameter which will narrow the search to only look for theatrical release dates within the specified country.
+   * @param {string} language(optional)  Language to request
+   * @param {number} page(optional)
+   * @param {string} region(optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-latest-movie
+   ********************/
+  async GetNowPlaying(): Promise<any>;
+  async GetNowPlaying(language: string): Promise<any>;
+  async GetNowPlaying(language: string, page: number): Promise<any>;
+  async GetNowPlaying(
+    language?: string,
+    page?: number,
+    region?: string
+  ): Promise<any> {
+    const baseURL = c_module.GetURL();
+    const token = c_module.GetToken();
+    const header = c_module.GetHeader();
+    let targetURL: string =
+      baseURL + c_module.Route.MOVIE + '/now_playing' + `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    if (region !== undefined) {
+      targetURL += `&region=${region}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   * 21.GET /movie/popular
+   * @description Get a list of the current popular movies on TMDB. This list updates daily.
+   * @param {string} language(optional)  Language to request
+   * @param {number} page(optional)
+   * @param {string} region(optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-popular-movies
+   ********************/
+  async GetPopular(): Promise<any>;
+  async GetPopular(language: string): Promise<any>;
+  async GetPopular(language: string, page: number): Promise<any>;
+  async GetPopular(
+    language?: string,
+    page?: number,
+    region?: string
+  ): Promise<any> {
+    const baseURL = c_module.GetURL();
+    const token = c_module.GetToken();
+    const header = c_module.GetHeader();
+    let targetURL: string =
+      baseURL + c_module.Route.MOVIE + '/now_playing' + `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    if (region !== undefined) {
+      targetURL += `&region=${region}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   * 22.GET /movie/top_rated
+   * @description Get the top rated movies on TMDB.
+   * @param {string} language(optional)  Language to request
+   * @param {number} page(optional)
+   * @param {string} region(optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-top-rated-movies
+   ********************/
+  async GetTopRated(): Promise<any>;
+  async GetTopRated(language: string): Promise<any>;
+  async GetTopRated(language: string, page: number): Promise<any>;
+  async GetTopRated(
+    language?: string,
+    page?: number,
+    region?: string
+  ): Promise<any> {
+    const baseURL = c_module.GetURL();
+    const token = c_module.GetToken();
+    const header = c_module.GetHeader();
+    let targetURL: string =
+      baseURL + c_module.Route.MOVIE + '/top_rated' + `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    if (region !== undefined) {
+      targetURL += `&region=${region}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
+  /********************
+   * 23.GET /movie/upcoming
+   * @description Get a list of upcoming movies in theatres.
+   * This is a release type query that looks for all movies that have a release type of 2 or 3 within the specified date range.
+   * You can optionally specify a region prameter which will narrow the search to only look for theatrical release dates within the specified country.
+   * @param {string} language(optional)  Language to request
+   * @param {number} page(optional)
+   * @param {string} region(optional)
+   * @doc https://developers.themoviedb.org/3/movies/get-upcoming
+   ********************/
+  async GetUpcoming(): Promise<any>;
+  async GetUpcoming(language: string): Promise<any>;
+  async GetUpcoming(language: string, page: number): Promise<any>;
+  async GetUpcoming(
+    language?: string,
+    page?: number,
+    region?: string
+  ): Promise<any> {
+    const baseURL = c_module.GetURL();
+    const token = c_module.GetToken();
+    const header = c_module.GetHeader();
+    let targetURL: string =
+      baseURL + c_module.Route.MOVIE + '/upcoming' + `?api_key=${token}`;
+    if (language !== undefined) {
+      targetURL += `&language=${language}`;
+    }
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    if (region !== undefined) {
+      targetURL += `&region=${region}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
   }
 }
 
