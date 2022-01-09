@@ -23,7 +23,7 @@ const Validator = new Proxy(
     get: function (obj: any, props: any) {
       return function (...params: any) {
         if (c_module.GetToken() === '') {
-          throw 'NONE TOKEN, please call "Init" function at first before calling other functions';
+          throw 'Error: non-TOKEN, Call "Init" function at first before calling other functions';
         }
         return obj[props].apply(null, params);
       };
