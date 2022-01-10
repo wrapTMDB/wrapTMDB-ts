@@ -1,3 +1,11 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) kwangsing3
+ *
+ * https://github.com/wrapTMDB/wrapTMDB-ts
+ *
+ */
 const axios = require('axios');
 import * as c_module from './common';
 

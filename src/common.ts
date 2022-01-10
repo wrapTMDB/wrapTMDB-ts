@@ -1,4 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) kwangsing3
+ *
+ * https://github.com/wrapTMDB/wrapTMDB-ts
+ *
+ */
 export const header = {
   'User-Agent': '',
   Referer: '',
@@ -14,6 +21,11 @@ export const Route = {
   MOVIE: 'movie/',
   TV: 'tv/',
   ACCOUNT: 'account/',
+  CERTIFICATION: 'certification/',
+  AUTHENTICATION: 'Authentication/',
+  COLLECTION: 'colleciton/',
+  COMPANY: 'company/',
+  CONFIGURATION: 'Configuration/',
 };
 /********************
  * Set Token

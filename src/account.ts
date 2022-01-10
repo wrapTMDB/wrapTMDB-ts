@@ -1,14 +1,22 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) kwangsing3
+ *
+ * https://github.com/wrapTMDB/wrapTMDB-ts
+ *
+ */
 const axios = require('axios');
 import * as c_module from './common';
 
 const baseURL = c_module.GetURL();
 
-export class account {
+export class Account {
   /********************
    * 1.GET /account
    * @description Get your account details.
    * @param {string} session_id
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-account-details
    ********************/
   async GetDetails(session_id: string): Promise<any> {
@@ -29,7 +37,7 @@ export class account {
    * @param {string} account_id(optional) your account ID
    * @param {string} language(optional)  Language to request
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-created-lists
    ********************/
   async GetCreatedLists(session_id: string): Promise<any>;
@@ -77,7 +85,7 @@ export class account {
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by(optional) "created_at.asc" or "created_at.desc"
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-favorite-movies
    ********************/
   async GetFavoriteMovies(session_id: string): Promise<any>;
@@ -129,7 +137,7 @@ export class account {
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by(optional) "created_at.asc" or "created_at.desc"
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-favorite-tv-shows
    ********************/
   async GetFavoriteTVShows(session_id: string): Promise<any>;
@@ -180,7 +188,7 @@ export class account {
    * @description This method allows you to mark a movie or TV show as a favorite item.
    * @param {string} session_id
    * @param {string} account_id(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @example query{
    *  "media_type": "movie",
    *  "media_id": 550,
@@ -213,7 +221,7 @@ export class account {
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by(optional) "created_at.asc" or "created_at.desc"
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-rated-movies
    ********************/
   async GetRatedMovies(session_id: string): Promise<any>;
@@ -264,7 +272,7 @@ export class account {
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-rated-tv-shows
    ********************/
   async GetRatedTVShows(session_id: string): Promise<any>;
@@ -310,7 +318,7 @@ export class account {
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-rated-tv-episodes
    ********************/
   async GetRatedTVEpisodes(session_id: string): Promise<any>;
@@ -356,7 +364,7 @@ export class account {
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-movie-watchlist
    ********************/
   async GetMovieWatchlist(session_id: string): Promise<any>;
@@ -402,7 +410,7 @@ export class account {
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by
    * @param {number} page(optional)
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-tv-show-watchlist
    ********************/
   async GetTVShowWatchlist(session_id: string): Promise<any>;
@@ -445,7 +453,7 @@ export class account {
    * @description Add a movie or TV show to your watchlist.
    * @param {string} session_id
    * @param {any} query
-   * @returns {number} JSON
+   * @returns {any} JSON
    * @example query{
    *  "media_type": "movie",
    *  "media_id": 11,

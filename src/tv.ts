@@ -1,4 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) kwangsing3
+ *
+ * https://github.com/wrapTMDB/wrapTMDB-ts
+ *
+ */
 const axios = require('axios');
 import * as c_module from './common';
 
@@ -141,7 +148,7 @@ export class TVInfos {
     if (start_date !== '' || start_date !== undefined)
       targetURL += `&start_date=${start_date}`;
     if (end_date !== '' || end_date !== undefined)
-      targetURL += `&end_date=${start_date}`;
+      targetURL += `&end_date=${end_date}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
     }
