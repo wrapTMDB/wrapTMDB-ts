@@ -13,6 +13,7 @@ const Common = {
 export const Route = {
   MOVIE: 'movie/',
   TV: 'tv/',
+  ACCOUNT: 'account/',
 };
 /********************
  * Set Token

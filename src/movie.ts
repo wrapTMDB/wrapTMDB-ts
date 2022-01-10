@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const axios = require('axios');
 import * as c_module from './common';
 
