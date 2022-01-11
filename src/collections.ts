@@ -37,7 +37,7 @@ export class Collections {
     return data.data;
   }
   /********************
-   * 1.GET /collection/{collection_id}/images
+   * 2.GET /collection/{collection_id}/images
    * @description Get collection details by id.
    * @param {number|string} collection_id
    * @param {string} language (optional)
@@ -63,7 +63,7 @@ export class Collections {
     return data.data;
   }
   /********************
-   * 1.GET /collection/{collection_id}/translations
+   * 3.GET /collection/{collection_id}/translations
    * @description Get the list translations for a collection by id.
    * @param {number|string} collection_id
    * @param {string} language (optional)

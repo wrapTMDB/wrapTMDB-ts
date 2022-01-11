@@ -26,6 +26,19 @@ export const Route = {
   COLLECTION: 'colleciton/',
   COMPANY: 'company/',
   CONFIGURATION: 'Configuration/',
+  CREDIT: 'credit/',
+  DISCOVER: 'discover/',
+  FIND: 'find/',
+  GENRE: 'genre/',
+  GUESTSESSION: 'guest_session/',
+  KEYWORD: 'keyword/',
+  LIST: 'list/',
+  NETWORK: 'network/',
+  TRENDING: 'trending/',
+  PEOPLE: 'people/',
+  REVIEWS: 'reviews/',
+  SEARCH: 'search/',
+  EPISODEGROUPS: 'episode_group/',
 };
 /********************
  * Set Token
