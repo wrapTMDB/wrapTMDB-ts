@@ -35,10 +35,11 @@ export const Route = {
   LIST: 'list/',
   NETWORK: 'network/',
   TRENDING: 'trending/',
-  PEOPLE: 'people/',
+  PEOPLE: 'person/',
   REVIEWS: 'reviews/',
   SEARCH: 'search/',
   EPISODEGROUPS: 'episode_group/',
+  WATCHPROVIDERS: 'watch/providers/',
 };
 /********************
  * Set Token
