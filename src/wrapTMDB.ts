@@ -90,24 +90,86 @@ export namespace MOVIE {
    * @param {string} language(optional)  Language to request
    * @example wraptmdb.MOVIE.GetDetails(624860);
    *          wraptmdb.MOVIE.GetDetails(624860,'en-US');
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-details
    ********************/
-  export function GetDetails(...parms: any) {
-    return Validator.MOVIEGetDetails(...parms);
+  export function GetDetails(
+    movie_id: number | string,
+    language?: string
+  ): any {
+    return Validator.MOVIEGetDetails(movie_id, language);
   }
-  export function GetAccountStates(...parms: any) {
-    return Validator.MOVIEGetAccountStates(...parms);
+  /********************
+   * 2.Grab the following account states for a session:
+   *   ‧Movie rating
+   *   ‧If it belongs to your watchlist
+   *   ‧If it belongs to your favourite list
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} session_id Authentication ID
+   * @param {string} guest_session_id (optional)
+   * @example wraptmdb.MOVIE.GetAccountStates(624860,"session_id");
+   *          wraptmdb.MOVIE.GetAccountStates(624860,"session_id","guest_session_id");
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-account-states
+   ********************/
+  export function GetAccountStates(
+    movie_id: number | string,
+    session_id: string,
+    guest_session_id?: string
+  ) {
+    return Validator.MOVIEGetAccountStates(
+      movie_id,
+      session_id,
+      guest_session_id
+    );
   }
-  export function GetAlternativetitles(...parms: any) {
-    return Validator.MOVIEGetAlternativetitles(...parms);
+  /********************
+   * 3.Get all of the alternative titles for a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} country (optional)
+   * @example wraptmdb.MOVIE.GetAlternativetitles(624860);
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-alternative-titles
+   ********************/
+  export function GetAlternativetitles(movie_id: string, country?: string) {
+    return Validator.MOVIEGetAlternativetitles(movie_id, country);
   }
-  export function GetChanges(...parms: any) {
-    return Validator.MOVIEGetChanges(...parms);
+  /********************
+   * 4.Get the changes for a movie. By default only the last 24 hours are returned.
+   * You can query up to 14 days in a single query by using the start_date and end_date query parameters.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} start_date (optional)
+   * @param {string} end_date (optional)
+   * @param {number} page (optional)
+   * @example wraptmdb.MOVIE.GetChanges(624860);
+   * wraptmdb.MOVIE.GetChanges(624860,'2016-08-29');
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
+   ********************/
+  export function GetChanges(
+    movie_id: string,
+    start_date?: string,
+    end_date?: string,
+    page?: number
+  ) {
+    return Validator.MOVIEGetChanges(movie_id, start_date, end_date, page);
   }
-  export function GetCredits(...parms: any) {
-    return Validator.MOVIEGetCredits(...parms);
+  /********************
+   * 5.Get the cast and crew for a movie.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language(optional)  Language to request
+   * @example wraptmdb.MOVIE.GetCredits(624860);
+   *          wraptmdb.MOVIE.GetCredits(624860,'en-US');
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-credits
+   ********************/
+  export function GetCredits(movie_id: string, language?: string) {
+    return Validator.MOVIEGetCredits(movie_id, language);
   }
-  export function GetExternalIDs(...parms: any) {
-    return Validator.MOVIEGetExternalIDs(...parms);
+  /********************
+   * 6.GET /movie/{movie_id}/external_ids
+   * @description Get the external ids for a movie. We currently support the following external sources.
+   * @param {number|string} movie_id  Movie ID in TMDB
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-external-ids
+   ********************/
+  export function GetExternalIDs(movie_id: string) {
+    return Validator.MOVIEGetExternalIDs(movie_id);
   }
   export function GetKeywords(...parms: any) {
     return Validator.MOVIEGetKeywords(...parms);

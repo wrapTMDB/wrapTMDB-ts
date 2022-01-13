@@ -15,14 +15,12 @@ export class MovieInfos {
   /********************
    * 1.GET /movie/{movie_id}
    * @description Get the primary information about a movie.
-   * @param {number} movie_id  Movie ID in TMDB
+   * @param {number|string} movie_id  Movie ID in TMDB
    * @param {string} language(optional)  Language to request
    * @returns {number} JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-details
    ********************/
-  async GetDetails(movie_id: string): Promise<any>;
-  async GetDetails(movie_id: string, language: string): Promise<any>;
-  async GetDetails(movie_id: string, language?: string): Promise<any> {
+  async GetDetails(movie_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -46,12 +44,6 @@ export class MovieInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-account-states
    ********************/
-  async GetAccountStates(movie_id: string, session_id: string): Promise<any>;
-  async GetAccountStates(
-    movie_id: string,
-    session_id: string,
-    guest_session_id: string
-  ): Promise<any>;
   async GetAccountStates(
     movie_id: string,
     session_id: string,
@@ -80,7 +72,6 @@ export class MovieInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-alternative-titles
    ********************/
-  async GetAlternativetitles(movie_id: string): Promise<any>;
   async GetAlternativetitles(movie_id: string, country?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -100,18 +91,12 @@ export class MovieInfos {
    * @description Get the changes for a movie. By default only the last 24 hours are returned.
    * You can query up to 14 days in a single query by using the start_date and end_date query parameters.
    * @param {number|string} movie_id  Movie ID in TMDB
-   * @param {number|string} start_date (optional)
-   * @param {number|string} end_date (optional)
+   * @param {string} start_date (optional)
+   * @param {string} end_date (optional)
    * @param {number} page (optional)
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
    ********************/
-  async GetChanges(movie_id: string): Promise<any>;
-  async GetChanges(
-    movie_id: string,
-    start_date: string,
-    end_date: string
-  ): Promise<any>;
   async GetChanges(
     movie_id: string,
     start_date?: string,
@@ -143,9 +128,8 @@ export class MovieInfos {
    * @param {number|string} movie_id  Movie ID in TMDB
    * @param {string} language(optional)  Language to request
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-credits
    ********************/
-  async GetCredits(movie_id: string): Promise<any>;
   async GetCredits(movie_id: string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
