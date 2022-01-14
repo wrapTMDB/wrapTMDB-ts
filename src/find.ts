@@ -13,7 +13,7 @@ const baseURL = c_module.GetURL();
 
 export class Find {
   /********************
-   * 3.GET /person/changes
+   * 1.GET /person/changes
    * @description The find method makes it easy to search for objects in TMDB database by an external id.
    * @param {number|string} external_id
    * @param {string} external_source (default: imdb_id)
@@ -21,7 +21,6 @@ export class Find {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/find/find-by-id
    ********************/
-  async GetFindByID(external_id: number | string): Promise<any>;
   async GetFindByID(
     external_id: number | string,
     language?: string,
@@ -40,3 +39,6 @@ export class Find {
     return data.data;
   }
 }
+/*
+  1.GET Find by ID
+*/

@@ -62,3 +62,8 @@ export class KeyWord {
     return data.data;
   }
 }
+
+/*
+  1.GET Get Details
+  2.GET Get Movies
+*/

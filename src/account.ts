@@ -34,28 +34,15 @@ export class Account {
    * 2.GET /account/{account_id}/lists
    * @description Get all of the lists created by an account. Will invlude private lists if you are the owner.
    * @param {string} session_id authentication ID
-   * @param {string} account_id(optional) your account ID
+   * @param {string} account_id your account ID
    * @param {string} language(optional)  Language to request
    * @param {number} page(optional)
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-created-lists
    ********************/
-  async GetCreatedLists(session_id: string): Promise<any>;
-  async GetCreatedLists(session_id: string, account_id: string): Promise<any>;
   async GetCreatedLists(
-    session_id: string,
     account_id: string,
-    language: string
-  ): Promise<any>;
-  async GetCreatedLists(
     session_id: string,
-    account_id: string,
-    language: string,
-    page: number
-  ): Promise<any>;
-  async GetCreatedLists(
-    session_id: string,
-    account_id?: string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -81,39 +68,24 @@ export class Account {
    * 3.GET /account/{account_id}/favorite/movies
    * @description Get the list of your favorite movies.
    * @param {string} session_id
-   * @param {string} account_id(optional)
+   * @param {string} account_id
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by(optional) "created_at.asc" or "created_at.desc"
    * @param {number} page(optional)
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-favorite-movies
    ********************/
-  async GetFavoriteMovies(session_id: string): Promise<any>;
-  async GetFavoriteMovies(session_id: string, account_id: string): Promise<any>;
+
   async GetFavoriteMovies(
-    session_id: string,
     account_id: string,
-    language: string
-  ): Promise<any>;
-  async GetFavoriteMovies(
     session_id: string,
-    account_id: string,
-    language: string,
-    sort_by: string
-  ): Promise<any>;
-  async GetFavoriteMovies(
-    session_id: string,
-    account_id?: string,
     language?: string,
     sort_by?: string,
     page?: number
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
     targetURL += 'favorite/' + c_module.Route.MOVIE;
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
     if (language !== undefined) {
@@ -132,7 +104,7 @@ export class Account {
   /********************
    * 4.GET /account/{account_id}/favorite/tv
    * @description Get the list of your favorite TV shows.
-   * @param {string} account_id(optional)
+   * @param {string} account_id
    * @param {string} session_id
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by(optional) "created_at.asc" or "created_at.desc"
@@ -140,35 +112,16 @@ export class Account {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-favorite-tv-shows
    ********************/
-  async GetFavoriteTVShows(session_id: string): Promise<any>;
   async GetFavoriteTVShows(
-    session_id: string,
-    account_id: string
-  ): Promise<any>;
-  async GetFavoriteTVShows(
-    session_id: string,
     account_id: string,
-    language: string
-  ): Promise<any>;
-  async GetFavoriteTVShows(
     session_id: string,
-    account_id: string,
-    language: string,
-    sort_by: string
-  ): Promise<any>;
-  async GetFavoriteTVShows(
-    session_id: string,
-    account_id?: string,
     language?: string,
     sort_by?: string,
     page?: number
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
     targetURL += 'favorite/' + c_module.Route.TV;
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
     if (language !== undefined) {
@@ -187,7 +140,7 @@ export class Account {
    * 5.POST /account/{account_id}/favorite
    * @description This method allows you to mark a movie or TV show as a favorite item.
    * @param {string} session_id
-   * @param {string} account_id(optional)
+   * @param {string} account_id
    * @returns {any} JSON
    * @example query{
    *  "media_type": "movie",
@@ -196,18 +149,14 @@ export class Account {
    * }
    * @doc https://developers.themoviedb.org/3/account/mark-as-favorite
    ********************/
-  async PostMarkAsFavorite(session_id: string, query: any): Promise<any>;
   async PostMarkAsFavorite(
-    session_id: string,
     query: any,
-    account_id?: String
+    account_id: string,
+    session_id: string
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
     targetURL += 'favorite/';
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
     const data: any = await axios.post(targetURL, query, header);
@@ -217,39 +166,24 @@ export class Account {
    * 6.GET /account/{account_id}/rated/movies
    * @description Get a list of all the movies you have rated.
    * @param {string} session_id
-   * @param {string} account_id(optional)
+   * @param {string} account_id
    * @param {string} language(optional)  Language to request
    * @param {string} sort_by(optional) "created_at.asc" or "created_at.desc"
    * @param {number} page(optional)
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-rated-movies
    ********************/
-  async GetRatedMovies(session_id: string): Promise<any>;
-  async GetRatedMovies(session_id: string, language: string): Promise<any>;
   async GetRatedMovies(
-    session_id: string,
-    language: string,
-    sort_by: string
-  ): Promise<any>;
-  async GetRatedMovies(
-    session_id: string,
-    language: string,
-    sort_by: string,
-    page: number
-  ): Promise<any>;
-  async GetRatedMovies(
+    account_id: string,
     session_id: string,
     language?: string,
     sort_by?: string,
-    page?: number,
-    account_id?: string
+    page?: number
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
+
     targetURL += 'rated/' + c_module.Route.MOVIE;
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
     if (language !== undefined) {
@@ -270,40 +204,23 @@ export class Account {
    * @param {string} account_id
    * @param {string} session_id
    * @param {string} language(optional)  Language to request
-   * @param {string} sort_by
+   * @param {string} sort_by(optional)
    * @param {number} page(optional)
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-rated-tv-shows
    ********************/
-  async GetRatedTVShows(session_id: string): Promise<any>;
-  async GetRatedTVShows(session_id: string, language: string): Promise<any>;
   async GetRatedTVShows(
-    session_id: string,
-    language: string,
-    sort_by: string
-  ): Promise<any>;
-  async GetRatedTVShows(
-    session_id: string,
-    language: string,
-    sort_by: string,
-    page: number
-  ): Promise<any>;
-  async GetRatedTVShows(
+    account_id: string,
     session_id: string,
     language?: string,
     sort_by?: string,
-    page?: number,
-    account_id?: string
+    page?: number
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
     targetURL += 'rated/' + c_module.Route.TV;
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
-
     targetURL += language !== undefined ? `&language=${language}` : '';
     targetURL += sort_by !== undefined ? `&sort_by=${sort_by}` : '';
     targetURL += page !== undefined ? `&page=${page}` : '';
@@ -321,35 +238,18 @@ export class Account {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-rated-tv-episodes
    ********************/
-  async GetRatedTVEpisodes(session_id: string): Promise<any>;
-  async GetRatedTVEpisodes(session_id: string, language: string): Promise<any>;
   async GetRatedTVEpisodes(
-    session_id: string,
-    language: string,
-    sort_by: string
-  ): Promise<any>;
-  async GetRatedTVEpisodes(
-    session_id: string,
-    language: string,
-    sort_by: string,
-    page: number
-  ): Promise<any>;
-  async GetRatedTVEpisodes(
+    account_id: string,
     session_id: string,
     language?: string,
     sort_by?: string,
-    page?: number,
-    account_id?: string
+    page?: number
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
     targetURL += 'rated/' + c_module.Route.TV + 'episodes';
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
-
     targetURL += language !== undefined ? `&language=${language}` : '';
     targetURL += sort_by !== undefined ? `&sort_by=${sort_by}` : '';
     targetURL += page !== undefined ? `&page=${page}` : '';
@@ -367,32 +267,16 @@ export class Account {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-movie-watchlist
    ********************/
-  async GetMovieWatchlist(session_id: string): Promise<any>;
-  async GetMovieWatchlist(session_id: string, language: string): Promise<any>;
   async GetMovieWatchlist(
-    session_id: string,
-    language: string,
-    sort_by: string
-  ): Promise<any>;
-  async GetMovieWatchlist(
-    session_id: string,
-    language: string,
-    sort_by: string,
-    page: number
-  ): Promise<any>;
-  async GetMovieWatchlist(
+    account_id: string,
     session_id: string,
     language?: string,
     sort_by?: string,
-    page?: number,
-    account_id?: string
+    page?: number
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
     targetURL += 'watchlist/' + c_module.Route.MOVIE;
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
     targetURL +=
@@ -413,32 +297,16 @@ export class Account {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-tv-show-watchlist
    ********************/
-  async GetTVShowWatchlist(session_id: string): Promise<any>;
-  async GetTVShowWatchlist(session_id: string, language: string): Promise<any>;
   async GetTVShowWatchlist(
-    session_id: string,
-    language: string,
-    sort_by: string
-  ): Promise<any>;
-  async GetTVShowWatchlist(
-    session_id: string,
-    language: string,
-    sort_by: string,
-    page: number
-  ): Promise<any>;
-  async GetTVShowWatchlist(
+    account_id: string,
     session_id: string,
     language?: string,
     sort_by?: string,
-    page?: number,
-    account_id?: string
+    page?: number
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.ACCOUNT;
-    if (account_id !== '' && account_id !== undefined) {
-      targetURL += `${account_id}/`;
-    }
+    let targetURL: string = baseURL + c_module.Route.ACCOUNT + `${account_id}/`;
     targetURL += 'watchlist/' + c_module.Route.TV;
     targetURL += `?api_key=${token}` + `&session_id=${session_id}`;
     targetURL +=
@@ -461,7 +329,6 @@ export class Account {
    * }
    * @doc https://developers.themoviedb.org/3/account/add-to-watchlist
    ********************/
-  async PostAddToWatchlist(session_id: string, query: any): Promise<any>;
   async PostAddToWatchlist(
     session_id: string,
     query: any,

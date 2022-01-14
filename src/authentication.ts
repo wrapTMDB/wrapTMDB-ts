@@ -124,3 +124,11 @@ export class Authentication {
     return data.data;
   }
 }
+/*
+1.GET Create Guest Session
+2.GET Create Request Token
+3.POST Create Session
+4.POST Create Session With Login
+5.POST Create Session (from v4 access token)
+6.DELETE Delete Session
+*/

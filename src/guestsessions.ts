@@ -103,3 +103,8 @@ export class GuestSessions {
     return data.data;
   }
 }
+/*
+1.GET Get Rated Movies
+2.GET Get Rated TV Shows
+3.GET Get Rated TV Episodes
+*/

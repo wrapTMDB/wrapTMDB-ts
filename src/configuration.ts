@@ -116,3 +116,11 @@ export class Configuration {
     return data.data;
   }
 }
+/*
+1.GET Get API Configuration
+2.GET Get Countries
+3.GET Get Jobs
+4.GET Get Languages
+5.GET Get Primary Translations
+6.GET Get Timezones
+*/

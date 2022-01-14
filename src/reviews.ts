@@ -27,3 +27,6 @@ export class Reviews {
     return data.data;
   }
 }
+/*
+1. GET Get Reviews
+*/

@@ -48,3 +48,7 @@ export class Certifications {
     return data.data;
   }
 }
+/*
+  1.GET Get Movie Certifications
+  2.GET Get TV Certifications
+*/

@@ -63,3 +63,8 @@ export class Companies {
     return data.data;
   }
 }
+/*
+1.GET Get Details
+2.GET Get Alternative Names
+3.GET Get Images
+*/

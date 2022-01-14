@@ -34,3 +34,6 @@ export class Trending {
     return data.data;
   }
 }
+/*
+1.GET Get Trending
+*/

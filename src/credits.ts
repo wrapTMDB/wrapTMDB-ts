@@ -13,7 +13,7 @@ const baseURL = c_module.GetURL();
 
 export class Credits {
   /********************
-   * 3.GET /credit/{credit_id}
+   * 1.GET /credit/{credit_id}
    * @description Get a movie or TV credit details by id.
    * @param {number|string} credit_id
    * @returns JSON
@@ -24,8 +24,10 @@ export class Credits {
     const header = c_module.GetHeader();
     const targetURL: string =
       baseURL + c_module.Route.CREDIT + `${credit_id}` + `?api_key=${token}`;
-
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
 }
+/*
+1. GET Get Details
+*/

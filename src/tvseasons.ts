@@ -333,3 +333,14 @@ export class TVseason {
     return data.data;
   }
 }
+/*
+  1.GET Get Details
+  2.GET Get Account States
+  3.GET Get Aggregate Credits
+  4.GET Get Changes
+  5.GET Get Credits
+  6.GET Get External IDs
+  7.GET Get Images
+  8.GET Get Translations
+  9.GET Get Videos
+*/

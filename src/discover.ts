@@ -95,7 +95,7 @@ export class Discover {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/discover/tv-discover
    ********************/
-  async GetTVDiscover(query: any): Promise<any> {
+  async GetTVDiscover(query?: any): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -161,3 +161,8 @@ function StringByQuery(query: any): string {
   result += '';
   return result;
 }
+
+/*
+  1.GET Movie Discover
+  2.GET TV Discover
+*/

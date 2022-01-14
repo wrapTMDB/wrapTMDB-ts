@@ -80,3 +80,8 @@ export class Watchproviders {
     return data.data;
   }
 }
+/*
+  1.GET GetAvailableRegions
+  2.GET GetMovieProviders
+  3.GET GetTVProviders
+*/

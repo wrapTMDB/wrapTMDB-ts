@@ -32,7 +32,6 @@ export class Change {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/changes/get-person-change-list
    ********************/
-  async GetPersonChangesList(): Promise<any>;
   async GetPersonChangesList(
     start_date?: string,
     end_date?: string,
@@ -53,3 +52,8 @@ export class Change {
     return data.data;
   }
 }
+/*
+//1.GET Get Movie Change List
+//2.GET Get TV Change List
+3.GET Get Person Change List
+*/

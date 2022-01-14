@@ -389,3 +389,15 @@ export class TVEpisodes {
     return data.data;
   }
 }
+/*
+  1.GET Get Details
+  2.GET Get Account States
+  3.GET Get Changes
+  4.GET Get Credits
+  5.GET Get External IDs
+  6.GET Get Images
+  7.GET Get Translations
+  8.POST Rate TV Episode
+  9.DELETE Delete Rating
+  10.GET Get Videos
+*/

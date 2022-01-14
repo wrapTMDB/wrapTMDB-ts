@@ -89,3 +89,8 @@ export class Collections {
     return data.data;
   }
 }
+/*
+1.GET Get Details
+2.GET Get Images
+3.GET Get Translations
+*/

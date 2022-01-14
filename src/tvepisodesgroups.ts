@@ -41,3 +41,6 @@ export class TVepisodesgroups {
     return data.data;
   }
 }
+/*
+  1.GET GetDetails
+*/

@@ -321,3 +321,12 @@ export class Search {
     return data.data;
   }
 }
+/*
+1.GET Search Companies
+2.GET Search Collections
+3.GET Search Keywords
+4.GET Search Movies
+5.GET Multi Search
+6.GET Search People
+7.GET Search TV Shows
+*/

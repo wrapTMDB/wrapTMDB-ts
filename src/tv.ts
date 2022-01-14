@@ -463,7 +463,7 @@ export class TV {
   async PostRateTVShow(
     tv_id: number | string,
     query: any,
-    session_id?: string,
+    session_id: string,
     guest_session_id?: string
   ): Promise<any> {
     const token = c_module.GetToken();

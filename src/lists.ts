@@ -185,3 +185,12 @@ export class Lists {
     return data.data;
   }
 }
+/*
+  1.GET Get Details
+  2.GET Check Item Status
+  3.POST Create List
+  4.POST Add Movie
+  5.POST Remove Movie
+  6.POST Clear List
+  7.DELETE Delete List
+*/

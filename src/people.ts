@@ -287,3 +287,16 @@ export class People {
     return data.data;
   }
 }
+/*
+  1.GET Get Details
+  2.GET Get Changes
+  3.GET Get Movie Credits
+  4.GET Get TV Credits
+  5.GET Get Combined Credits
+  6.GET Get External IDs
+  7.GET Get Images
+  8.GET Get Tagged Images
+  9.GET Get Translations
+  10.GET Get Latest
+  11.GET Get Popular
+*/
