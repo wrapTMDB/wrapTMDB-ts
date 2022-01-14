@@ -11,16 +11,16 @@ import * as c_module from './common';
 
 const baseURL = c_module.GetURL();
 
-export class TVInfos {
+export class TV {
   /********************
-   * REST Get Series/TV infomation
-   * @param {number} tv_id  Series/TV ID in TMDB
+   * 1.GET /tv/{tv_id}
+   * @description Get the primary TV show details by id.
+   * @param {number|string} tv_id  Series/TV ID in TMDB
    * @param {string} language(optional)  Language to request
    * @returns {number} JSON
+   * @doc https://developers.themoviedb.org/3/tv/get-tv-details
    ********************/
-  async GetDetails(tv_id: string): Promise<any>;
-  async GetDetails(tv_id: string, language: string): Promise<any>;
-  async GetDetails(tv_id: string, language?: string): Promise<any> {
+  async GetDetails(tv_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -44,14 +44,8 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv/get-tv-account-states
    ********************/
-  async GetAccountStates(tv_id: string, session_id: string): Promise<any>;
   async GetAccountStates(
-    tv_id: string,
-    session_id: string,
-    guest_session_id: string
-  ): Promise<any>;
-  async GetAccountStates(
-    tv_id: string,
+    tv_id: number | string,
     session_id: string,
     guest_session_id?: string
   ): Promise<any> {
@@ -80,8 +74,10 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv/get-tv-aggregate-credits
    ********************/
-  async GetAggregate_credits(tv_id: string): Promise<any>;
-  async GetAggregate_credits(tv_id: string, language?: string): Promise<any> {
+  async GetAggregateCredits(
+    tv_id: number | string,
+    language?: string
+  ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -103,8 +99,10 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv/get-tv-alternative-titles
    ********************/
-  async GetAlternativetitles(tv_id: string): Promise<any>;
-  async GetAlternativetitles(tv_id: string, country?: string): Promise<any> {
+  async GetAlternativetitles(
+    tv_id: number | string,
+    language?: string
+  ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -113,8 +111,8 @@ export class TVInfos {
       tv_id +
       '/alternative_titles' +
       `?api_key=${token}`;
-    if (country !== '' || country !== undefined)
-      targetURL += `&country=${country}`;
+    if (language !== '' || language !== undefined)
+      targetURL += `&language=${language}`;
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -129,14 +127,8 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv/get-tv-changes
    ********************/
-  async GetChanges(tv_id: string): Promise<any>;
   async GetChanges(
-    tv_id: string,
-    start_date: string,
-    end_date: string
-  ): Promise<any>;
-  async GetChanges(
-    tv_id: string,
+    tv_id: number | string,
     start_date?: string,
     end_date?: string,
     page?: number
@@ -163,8 +155,10 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv/get-tv-content-ratings
    ********************/
-  async GetContentRatings(tv_id: string): Promise<any>;
-  async GetContentRatings(tv_id: string, language?: string): Promise<any> {
+  async GetContentRatings(
+    tv_id: number | string,
+    language?: string
+  ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -187,8 +181,7 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
    ********************/
-  async GetCredits(tv_id: string): Promise<any>;
-  async GetCredits(tv_id: string, language?: string): Promise<any> {
+  async GetCredits(tv_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -209,8 +202,10 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv/get-tv-episode-groups
    ********************/
-  async GetEpisodeGroup(tv_id: string): Promise<any>;
-  async GetEpisodeGroup(tv_id: string, language?: string): Promise<any> {
+  async GetEpisodeGroup(
+    tv_id: number | string,
+    language?: string
+  ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -233,8 +228,10 @@ export class TVInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv/get-tv-external-ids
    ********************/
-  async GetExternalIDs(tv_id: string): Promise<any>;
-  async GetExternalIDs(tv_id: string, language?: string): Promise<any> {
+  async GetExternalIDs(
+    tv_id: number | string,
+    language?: string
+  ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -257,8 +254,7 @@ export class TVInfos {
    * @param {string} language (optional)
    * @doc https://developers.themoviedb.org/3/tv/get-tv-images
    ********************/
-  async GetImage(tv_id: string): Promise<any>;
-  async GetImage(tv_id: string, language?: string): Promise<any> {
+  async GetImages(tv_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -277,7 +273,7 @@ export class TVInfos {
    * @param {number|string} tv_id  tv ID in TMDB
    * @doc https://developers.themoviedb.org/3/tv/get-tv-keywords
    ********************/
-  async GetKeywords(tv_id: string): Promise<any> {
+  async GetKeywords(tv_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -294,10 +290,8 @@ export class TVInfos {
    * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/tv/get-tv-recommendations
    ********************/
-  async GetRecommendations(tv_id: string): Promise<any>;
-  async GetRecommendations(tv_id: string, language: string): Promise<any>;
   async GetRecommendations(
-    tv_id: string,
+    tv_id: number | string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -327,10 +321,8 @@ export class TVInfos {
    * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/tv/get-tv-reviews
    ********************/
-  async GetReviews(tv_id: string): Promise<any>;
-  async GetReviews(tv_id: string, language: string): Promise<any>;
   async GetReviews(
-    tv_id: string,
+    tv_id: number | string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -353,7 +345,7 @@ export class TVInfos {
    * @param {number|string} tv_id  tv ID in TMDB
    * @doc https://developers.themoviedb.org/3/tv/get-screened-theatrically
    ********************/
-  async GetScreenedTheatrically(tv_id: string): Promise<any> {
+  async GetScreenedTheatrically(tv_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -375,10 +367,13 @@ export class TVInfos {
    * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/tv/get-similar-tv-shows
    ********************/
-  async GetSimilarTVShows(tv_id: string): Promise<any>;
-  async GetSimilarTVShows(tv_id: string, language: string): Promise<any>;
+  async GetSimilarTVShows(tv_id: number | string): Promise<any>;
   async GetSimilarTVShows(
-    tv_id: string,
+    tv_id: number | string,
+    language: string
+  ): Promise<any>;
+  async GetSimilarTVShows(
+    tv_id: number | string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -401,7 +396,7 @@ export class TVInfos {
    * @param {number|string} tv_id  tv ID in TMDB
    * @doc https://developers.themoviedb.org/3/movies/get-movie-translations
    ********************/
-  async GetTranslations(tv_id: string): Promise<any> {
+  async GetTranslations(tv_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -420,8 +415,7 @@ export class TVInfos {
    * @param {string} language(optional)  Language to request
    * @doc https://developers.themoviedb.org/3/tv/get-tv-videos
    ********************/
-  async GetVideos(tv_id: string): Promise<any>;
-  async GetVideos(tv_id: string, language?: string): Promise<any> {
+  async GetVideos(tv_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -441,7 +435,7 @@ export class TVInfos {
     * @param {number|string} tv_id  tv ID in TMDB
     * @doc https://developers.themoviedb.org/3/movies/get-movie-watch-providers
     ********************/
-  async GetWatchProviders(tv_id: string): Promise<any> {
+  async GetWatchProviders(tv_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -466,9 +460,8 @@ export class TVInfos {
    *  "value":8.5
    * }
    ********************/
-  async PostRateTVShow(tv_id: string, query: any): Promise<any>;
   async PostRateTVShow(
-    tv_id: string,
+    tv_id: number | string,
     query: any,
     session_id?: string,
     guest_session_id?: string
@@ -493,13 +486,12 @@ export class TVInfos {
    * A valid session or guest session ID is required
    * @param {number|string} tv_id  tv ID in TMDB
    * @param {string} guest_session_id (optional)
-   * @param {string} session_id (optional)
+   * @param {string} session_id
    * @doc https://developers.themoviedb.org/3/tv/delete-tv-show-rating
    ********************/
-  async DeleteRating(tv_id: string, session_id: string): Promise<any>;
   async DeleteRating(
-    tv_id: string,
-    session_id?: string,
+    tv_id: number | string,
+    session_id: string,
     guest_session_id?: string
   ): Promise<any> {
     const token = c_module.GetToken();
@@ -540,8 +532,6 @@ export class TVInfos {
    * @param {number} page(optional)
    * @doc https://developers.themoviedb.org/3/tv/get-tv-airing-today
    ********************/
-  async GetTVAiringToday(): Promise<any>;
-  async GetTVAiringToday(language: string): Promise<any>;
   async GetTVAiringToday(language?: string, page?: number): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -564,9 +554,7 @@ export class TVInfos {
    * @param {number} page(optional)
    * @doc https://developers.themoviedb.org/3/tv/get-tv-on-the-air
    ********************/
-  async GetOnTheAir(): Promise<any>;
-  async GetOnTheAir(language: string): Promise<any>;
-  async GetOnTheAir(language?: string, page?: number): Promise<any> {
+  async GetTVOnTheAir(language?: string, page?: number): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -587,8 +575,6 @@ export class TVInfos {
    * @param {number} page(optional)
    * @doc https://developers.themoviedb.org/3/tv/get-popular-tv-shows
    ********************/
-  async GetPopular(): Promise<any>;
-  async GetPopular(language: string): Promise<any>;
   async GetPopular(language?: string, page?: number): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -611,8 +597,6 @@ export class TVInfos {
    * @param {number} page(optional)
    * @doc https://developers.themoviedb.org/3/tv/get-top-rated-tv
    ********************/
-  async GetTopRated(): Promise<any>;
-  async GetTopRated(language: string): Promise<any>;
   async GetTopRated(language?: string, page?: number): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();

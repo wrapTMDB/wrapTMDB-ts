@@ -11,7 +11,7 @@ import * as c_module from './common';
 
 const baseURL = c_module.GetURL();
 
-export class MovieInfos {
+export class Movie {
   /********************
    * 1.GET /movie/{movie_id}
    * @description Get the primary information about a movie.
@@ -45,7 +45,7 @@ export class MovieInfos {
    * @doc https://developers.themoviedb.org/3/movies/get-movie-account-states
    ********************/
   async GetAccountStates(
-    movie_id: string,
+    movie_id: number | string,
     session_id: string,
     guest_session_id?: string
   ): Promise<any> {
@@ -72,7 +72,10 @@ export class MovieInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-alternative-titles
    ********************/
-  async GetAlternativetitles(movie_id: string, country?: string): Promise<any> {
+  async GetAlternativetitles(
+    movie_id: number | string,
+    country?: string
+  ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -98,7 +101,7 @@ export class MovieInfos {
    * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
    ********************/
   async GetChanges(
-    movie_id: string,
+    movie_id: number | string,
     start_date?: string,
     end_date?: string,
     page?: number
@@ -130,7 +133,7 @@ export class MovieInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-credits
    ********************/
-  async GetCredits(movie_id: string, language?: string): Promise<any> {
+  async GetCredits(movie_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -152,7 +155,7 @@ export class MovieInfos {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/movies/get-movie-external-ids
    ********************/
-  async GetExternalIDs(movie_id: string): Promise<any> {
+  async GetExternalIDs(movie_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -176,10 +179,8 @@ export class MovieInfos {
    * @param {string} include_image_language (optional)
    * @doc https://developers.themoviedb.org/3/movies/get-movie-images
    ********************/
-  async GetImage(movie_id: string): Promise<any>;
-  async GetImage(movie_id: string, language: string): Promise<any>;
   async GetImage(
-    movie_id: string,
+    movie_id: number | string,
     language?: string,
     include_image_language?: string
   ): Promise<any> {
@@ -207,7 +208,7 @@ export class MovieInfos {
    * @param {number|string} movie_id  Movie ID in TMDB
    * @doc https://developers.themoviedb.org/3/movies/get-movie-keywords
    ********************/
-  async GetKeywords(movie_id: string): Promise<any> {
+  async GetKeywords(movie_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -228,10 +229,8 @@ export class MovieInfos {
    * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/movies/get-movie-lists
    ********************/
-  async GetLists(movie_id: string): Promise<any>;
-  async GetLists(movie_id: string, language: string): Promise<any>;
   async GetLists(
-    movie_id: string,
+    movie_id: number | string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -256,12 +255,12 @@ export class MovieInfos {
    *10.GET /movie/{movie_id}/recommendations
    * @description Get a list of recommended movies for a movie.
    * @param {number|string} movie_id  Movie ID in TMDB
+   * @param {string} language(optional)  Language to request
+   * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/movies/get-movie-recommendations
    ********************/
-  async GetRecommendations(movie_id: string): Promise<any>;
-  async GetRecommendations(movie_id: string, language: string): Promise<any>;
   async GetRecommendations(
-    movie_id: string,
+    movie_id: number | string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -295,7 +294,7 @@ export class MovieInfos {
    * @param {number|string} movie_id  Movie ID in TMDB
    * @doc https://developers.themoviedb.org/3/movies/get-movie-release-dates
    ********************/
-  async GetReleaseDates(movie_id: string): Promise<any> {
+  async GetReleaseDates(movie_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -315,10 +314,8 @@ export class MovieInfos {
    * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/movies/get-movie-reviews
    ********************/
-  async GetReviews(movie_id: string): Promise<any>;
-  async GetReviews(movie_id: string, language: string): Promise<any>;
   async GetReviews(
-    movie_id: string,
+    movie_id: number | string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -348,10 +345,8 @@ export class MovieInfos {
    * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/movies/get-similar-movies
    ********************/
-  async GetSimilar(movie_id: string): Promise<any>;
-  async GetSimilar(movie_id: string, language: string): Promise<any>;
   async GetSimilar(
-    movie_id: string,
+    movie_id: number | string,
     language?: string,
     page?: number
   ): Promise<any> {
@@ -379,7 +374,7 @@ export class MovieInfos {
    * @param {number|string} movie_id  Movie ID in TMDB
    * @doc https://developers.themoviedb.org/3/movies/get-movie-translations
    ********************/
-  async GetTranslations(movie_id: string): Promise<any> {
+  async GetTranslations(movie_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -398,8 +393,7 @@ export class MovieInfos {
    * @param {string} language(optional)  Language to request
    * @doc https://developers.themoviedb.org/3/movies/get-movie-videos
    ********************/
-  async GetVideos(movie_id: string): Promise<any>;
-  async GetVideos(movie_id: string, language?: string): Promise<any> {
+  async GetVideos(movie_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
@@ -422,7 +416,7 @@ export class MovieInfos {
    * @param {number|string} movie_id  Movie ID in TMDB
    * @doc https://developers.themoviedb.org/3/movies/get-movie-watch-providers
    ********************/
-  async GetWatchProviders(movie_id: string): Promise<any> {
+  async GetWatchProviders(movie_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
@@ -447,9 +441,8 @@ export class MovieInfos {
    *  "value":8.5
    * }
    ********************/
-  async PostRateMovie(movie_id: string, query: any): Promise<any>;
   async PostRateMovie(
-    movie_id: string,
+    movie_id: number | string,
     query: any,
     session_id?: string,
     guest_session_id?: string
@@ -481,9 +474,8 @@ export class MovieInfos {
    * @param {string} session_id (optional)
    * @doc https://developers.themoviedb.org/3/movies/delete-movie-rating
    ********************/
-  async DeleteRating(movie_id: string, session_id: string): Promise<any>;
   async DeleteRating(
-    movie_id: string,
+    movie_id: number | string,
     session_id?: string,
     guest_session_id?: string
   ): Promise<any> {
@@ -531,9 +523,6 @@ export class MovieInfos {
    * @param {string} region(optional)
    * @doc https://developers.themoviedb.org/3/movies/get-latest-movie
    ********************/
-  async GetNowPlaying(): Promise<any>;
-  async GetNowPlaying(language: string): Promise<any>;
-  async GetNowPlaying(language: string, page: number): Promise<any>;
   async GetNowPlaying(
     language?: string,
     page?: number,
@@ -564,9 +553,6 @@ export class MovieInfos {
    * @param {string} region(optional)
    * @doc https://developers.themoviedb.org/3/movies/get-popular-movies
    ********************/
-  async GetPopular(): Promise<any>;
-  async GetPopular(language: string): Promise<any>;
-  async GetPopular(language: string, page: number): Promise<any>;
   async GetPopular(
     language?: string,
     page?: number,
@@ -597,9 +583,6 @@ export class MovieInfos {
    * @param {string} region(optional)
    * @doc https://developers.themoviedb.org/3/movies/get-top-rated-movies
    ********************/
-  async GetTopRated(): Promise<any>;
-  async GetTopRated(language: string): Promise<any>;
-  async GetTopRated(language: string, page: number): Promise<any>;
   async GetTopRated(
     language?: string,
     page?: number,
@@ -632,9 +615,6 @@ export class MovieInfos {
    * @param {string} region(optional)
    * @doc https://developers.themoviedb.org/3/movies/get-upcoming
    ********************/
-  async GetUpcoming(): Promise<any>;
-  async GetUpcoming(language: string): Promise<any>;
-  async GetUpcoming(language: string, page: number): Promise<any>;
   async GetUpcoming(
     language?: string,
     page?: number,
