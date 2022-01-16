@@ -25,17 +25,6 @@ export class TVEpisodes {
   async GetDetails(
     tv_id: number | string,
     season_number: number | string,
-    episode_number: number | string
-  ): Promise<any>;
-  async GetDetails(
-    tv_id: number | string,
-    season_number: number | string,
-    episode_number: number | string,
-    language: string
-  ): Promise<any>;
-  async GetDetails(
-    tv_id: number | string,
-    season_number: number | string,
     episode_number: number | string,
     language?: string,
     append_to_response?: string
@@ -69,16 +58,6 @@ export class TVEpisodes {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-episodes/get-tv-episode-account-states
    ********************/
-  async GetAccountStates(
-    tv_id: number | string,
-    season_number: number | string,
-    episode_number: number | string
-  ): Promise<any>;
-  async GetAccountStates(
-    tv_id: number | string,
-    season_number: number | string,
-    episode_number: number | string
-  ): Promise<any>;
   async GetAccountStates(
     tv_id: number | string,
     season_number: number | string,
@@ -116,7 +95,6 @@ export class TVEpisodes {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-episodes/get-tv-episode-changes
    ********************/
-  async GetChanges(episode_id: number | string): Promise<any>;
   async GetChanges(
     episode_id: number | string,
     start_date?: string,
@@ -152,11 +130,6 @@ export class TVEpisodes {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-episodes/get-tv-episode-credits
    ********************/
-  async GetCredits(
-    tv_id: number | string,
-    season_number: number | string,
-    episode_number: number | string
-  ): Promise<any>;
   async GetCredits(
     tv_id: number | string,
     season_number: number | string,
@@ -276,8 +249,8 @@ export class TVEpisodes {
    * @param {number|string} season_number
    * @param {number|string} episode_number
    * @param {any} query
-   * @param {string} guest_session_id (optional)
    * @param {string} session_id (optional)
+   * @param {string} guest_session_id (optional)
    * @returns JSON
    * @example query{
    *    "value": 8.5
@@ -289,8 +262,8 @@ export class TVEpisodes {
     season_number: number | string,
     episode_number: number | string,
     query: any,
-    guest_session_id?: string,
-    session_id?: string
+    session_id?: string,
+    guest_session_id?: string
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -318,8 +291,8 @@ export class TVEpisodes {
    * @param {number|string} tv_id
    * @param {number|string} season_number
    * @param {number|string} episode_number
-   * @param {string} guest_session_id (optional)
    * @param {string} session_id (optional)
+   * @param {string} guest_session_id (optional)
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-episodes/delete-tv-episode-rating
    ********************/
@@ -360,11 +333,6 @@ export class TVEpisodes {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-episodes/get-tv-episode-videos
    ********************/
-  async GetVideos(
-    tv_id: number | string,
-    season_number: number | string,
-    episode_number: number | string
-  ): Promise<any>;
   async GetVideos(
     tv_id: number | string,
     season_number: number | string,

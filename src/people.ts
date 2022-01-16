@@ -19,8 +19,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-details
    ********************/
-  async GetDetails(person_id: number | string): Promise<any>;
-  async GetDetails(person_id: number | string, language: string): Promise<any>;
   async GetDetails(
     person_id: number | string,
     language?: string,
@@ -47,7 +45,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-changes
    ********************/
-  async GetChanges(person_id: number | string): Promise<any>;
   async GetChanges(
     person_id: number | string,
     start_date?: string,
@@ -77,7 +74,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-movie-credits
    ********************/
-  async GetMovieCredits(person_id: number | string): Promise<any>;
   async GetMovieCredits(
     person_id: number | string,
     language?: string
@@ -102,7 +98,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-tv-credits
    ********************/
-  async GetTVCredits(person_id: number | string): Promise<any>;
   async GetTVCredits(
     person_id: number | string,
     language?: string
@@ -127,7 +122,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-combined-credits
    ********************/
-  async GetCombinedCredits(person_id: number | string): Promise<any>;
   async GetCombinedCredits(
     person_id: number | string,
     language?: string
@@ -152,7 +146,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-external-ids
    ********************/
-  async GetExternalIDs(person_id: number | string): Promise<any>;
   async GetExternalIDs(
     person_id: number | string,
     language?: string
@@ -196,11 +189,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-tagged-images
    ********************/
-  async GetTaggedImages(person_id: number | string): Promise<any>;
-  async GetTaggedImages(
-    person_id: number | string,
-    language: string
-  ): Promise<any>;
   async GetTaggedImages(
     person_id: number | string,
     language?: string,
@@ -229,7 +217,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-translations
    ********************/
-  async GetTranslations(person_id: number | string): Promise<any>;
   async GetTranslations(
     person_id: number | string,
     language?: string
@@ -253,7 +240,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-latest-person
    ********************/
-  async GetLatest(): Promise<any>;
   async GetLatest(language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -272,7 +258,6 @@ export class People {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/people/get-person-details
    ********************/
-  async GetPopular(): Promise<any>;
   async GetPopular(language?: string, page?: number): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();

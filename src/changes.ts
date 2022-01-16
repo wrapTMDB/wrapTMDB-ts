@@ -13,13 +13,65 @@ const baseURL = c_module.GetURL();
 export class Change {
   /********************
    * 1.GET /movie/changes
+   * @description Get a list of all of the movie ids that have been changed in the past 24 hours.
+   * You can query it for up to 14 days worth of changed IDs at a time with
+   * the "start_date" and "end_date" query parameters. 100 items are returned per page.
+   * @param {number|string} start_date (optional)
+   * @param {number|string} end_date (optional)
+   * @param {number} page (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/changes/get-person-change-list
    ********************/
-  // In movie.ts
+  async GetMovieChangeList(
+    start_date?: string,
+    end_date?: string,
+    page?: number
+  ): Promise<any> {
+    const token = c_module.GetToken();
+    const header = c_module.GetHeader();
+    let targetURL: string =
+      baseURL + c_module.Route.MOVIE + '/changes' + `?api_key=${token}`;
+    if (start_date !== '' || start_date !== undefined)
+      targetURL += `&start_date=${start_date}`;
+    if (end_date !== '' || end_date !== undefined)
+      targetURL += `&end_date=${end_date}`;
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
 
   /********************
    * 2.GET /tv/changes
+   * @description Get a list of all of the TV show ids that have been changed in the past 24 hours.
+   * You can query it for up to 14 days worth of changed IDs at a time
+   * with the "start_date" and "end_date" query parameters. 100 items are returned per page.
+   * @param {number|string} start_date (optional)
+   * @param {number|string} end_date (optional)
+   * @param {number} page (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/changes/get-person-change-list
    ********************/
-  // In tv.ts
+  async GetTVChangeList(
+    start_date?: string,
+    end_date?: string,
+    page?: number
+  ): Promise<any> {
+    const token = c_module.GetToken();
+    const header = c_module.GetHeader();
+    let targetURL: string =
+      baseURL + c_module.Route.TV + '/changes' + `?api_key=${token}`;
+    if (start_date !== '' || start_date !== undefined)
+      targetURL += `&start_date=${start_date}`;
+    if (end_date !== '' || end_date !== undefined)
+      targetURL += `&end_date=${end_date}`;
+    if (page !== undefined) {
+      targetURL += `&page=${page}`;
+    }
+    const data: any = await axios.get(targetURL, header);
+    return data.data;
+  }
 
   /********************
    * 3.GET /person/changes

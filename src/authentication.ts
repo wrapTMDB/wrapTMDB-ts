@@ -115,7 +115,7 @@ export class Authentication {
    * }
    * @doc https://developers.themoviedb.org/3/account/get-account-details
    ********************/
-  async DeleteSession(query: any): Promise<any> {
+  async DeleteDeleteSession(query: any): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =

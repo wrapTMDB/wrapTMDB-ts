@@ -23,15 +23,6 @@ export class TVseason {
    ********************/
   async GetDetails(
     tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
-  async GetDetails(
-    tv_id: number | string,
-    season_number: number | string,
-    language: string
-  ): Promise<any>;
-  async GetDetails(
-    tv_id: number | string,
     season_number: number | string,
     language?: string,
     append_to_response?: string
@@ -57,27 +48,18 @@ export class TVseason {
    * @description Returns all of the user ratings for the season's episodes.
    * @param {number|string} tv_id
    * @param {number|string} season_number
-   * @param {string} language (optional)
-   * @param {string} guest_session_id (optional)
    * @param {string} session_id (optional)
+   * @param {string} guest_session_id (optional)
+   * @param {string} language (optional)
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
    ********************/
   async GetAccountStates(
     tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
-  async GetAccountStates(
-    tv_id: number | string,
     season_number: number | string,
-    language?: string
-  ): Promise<any>;
-  async GetAccountStates(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string,
+    session_id?: string,
     guest_session_id?: string,
-    session_id?: string
+    language?: string
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -109,10 +91,6 @@ export class TVseason {
    ********************/
   async GetAggregateCredits(
     tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
-  async GetAggregateCredits(
-    tv_id: number | string,
     season_number: number | string,
     language?: string
   ): Promise<any> {
@@ -141,7 +119,6 @@ export class TVseason {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-changes
    ********************/
-  async GetChanges(season_id: number | string): Promise<any>;
   async GetChanges(
     season_id: number | string,
     start_date?: string,
@@ -178,10 +155,6 @@ export class TVseason {
    ********************/
   async GetCredits(
     tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
-  async GetCredits(
-    tv_id: number | string,
     season_number: number | string,
     language?: string
   ): Promise<any> {
@@ -209,10 +182,6 @@ export class TVseason {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
    ********************/
-  async GetExternalIDs(
-    tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
   async GetExternalIDs(
     tv_id: number | string,
     season_number: number | string,
@@ -244,10 +213,6 @@ export class TVseason {
    ********************/
   async GetImages(
     tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
-  async GetImages(
-    tv_id: number | string,
     season_number: number | string,
     language?: string
   ): Promise<any> {
@@ -277,10 +242,6 @@ export class TVseason {
    ********************/
   async GetTranslations(
     tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
-  async GetTranslations(
-    tv_id: number | string,
     season_number: number | string,
     language?: string
   ): Promise<any> {
@@ -308,10 +269,6 @@ export class TVseason {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-videos
    ********************/
-  async GetVideos(
-    tv_id: number | string,
-    season_number: number | string
-  ): Promise<any>;
   async GetVideos(
     tv_id: number | string,
     season_number: number | string,

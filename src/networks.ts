@@ -18,7 +18,7 @@ export class Network {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/networks/get-network-details
    ********************/
-  async GetDetails(network_id: string): Promise<any> {
+  async GetDetails(network_id: string | number): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =

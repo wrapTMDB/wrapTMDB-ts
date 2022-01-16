@@ -20,7 +20,6 @@ export class Lists {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/lists/get-list-details
    ********************/
-  async GetDetails(list_id: number | string): Promise<any>;
   async GetDetails(list_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -164,7 +163,7 @@ export class Lists {
   }
   /********************
    * 7.DELETE /list/{list_id}
-   * @description Create a list.
+   * @description Delete  a list.
    * @param {number|string} list_id
    * @param {number|string} session_id
    * @returns JSON

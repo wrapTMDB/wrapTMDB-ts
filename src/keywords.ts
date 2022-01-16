@@ -11,7 +11,7 @@ import * as c_module from './common';
 
 const baseURL = c_module.GetURL();
 
-export class KeyWord {
+export class KeyWords {
   /********************
    * 1.GET /keyword/{keyword_id}
    * @description
@@ -38,8 +38,6 @@ export class KeyWord {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/keywords/get-keyword-details
    ********************/
-  async GetMovies(keyword_id: number | string): Promise<any>;
-  async GetMovies(keyword_id: number | string, language: string): Promise<any>;
   async GetMovies(
     keyword_id: number | string,
     language?: string,

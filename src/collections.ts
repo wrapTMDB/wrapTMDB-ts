@@ -19,7 +19,6 @@ export class Collections {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/collections/get-collection-details
    ********************/
-  async GetDetails(collection_id: string | number): Promise<any>;
   async GetDetails(
     collection_id: string | number,
     language?: string
@@ -44,7 +43,6 @@ export class Collections {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/collections/get-collection-images
    ********************/
-  async GetImages(collection_id: string | number): Promise<any>;
   async GetImages(
     collection_id: string | number,
     language?: string
@@ -70,7 +68,6 @@ export class Collections {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/collections/get-collection-translations
    ********************/
-  async GetTranslations(collection_id: string | number): Promise<any>;
   async GetTranslations(
     collection_id: string | number,
     language?: string
