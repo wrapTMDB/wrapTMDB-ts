@@ -8,7 +8,7 @@
 # WrapTMDB-ts  
 <h3>
 <p align="center">
-<a href="/docs/README.md"> English </a>|
+<a href="README.md"> English </a>|
 <a href="/docs/README_ja.md"> 日本語 </a>|
 <a href="/docs/README_zh-tw.md"> 繁體中文 </a>|
 <a href="/docs/README_zh-cn.md"> 简体中文 </a>
@@ -45,7 +45,7 @@ Before use this tool, make sure already have your [api_key](https://developers.t
 <br/>
 
 ``` Typescript
-import * as wrapTMDB from './wrapTMDB'; // import as a namespace
+import * as wrapTMDB from 'wraptmdb-ts'; // import as a namespace
 
 wrapTMDB.Init('YOUR api_key');        //Always init your TOKEN_key first.
 wrapTMDB.SetHeader({                  //Set header (optional but recommand)
@@ -74,17 +74,17 @@ ___
 ```Typescript
 data = await wrapTMDB.Movies.GetDetails(624860);
 ```
-![alt text](172714.png)
+![alt text](docs/172714.png)
 
 ```Typescript
 data = await wrapTMDB.Collections.GetTranslations(654321, 'en-US');
 ```
-![alt text](172927.png)
+![alt text](docs/172927.png)
 
 ```Typescript
 data = await wrapTMDB.TVseasons.GetImages(54321, 65421, 'en-US');
 ```
-![alt text](172331.png)
+![alt text](docs/172331.png)
 
 
 
