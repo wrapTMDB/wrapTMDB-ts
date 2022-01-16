@@ -108,10 +108,10 @@ build/
 
 
 #ignore debug entry point
-/build/src/index.*
-/build/src/index.d.ts
-/build/src/index.js
-/build/src/index.js.map
+publish/src/index.*
+publish/src/index.d.ts
+publish/src/index.js
+publish/src/index.js.map
 tsconfig.json
 tslint.json
 src/

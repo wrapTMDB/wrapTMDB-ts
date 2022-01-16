@@ -1,13 +1,13 @@
 {
   "name": "wraptmdb-ts",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "WrapTMDB-ts is a wrapper tool for TMDB.",
   "main": "build/src/wrapTMDB.js",
   "types": "build/src/wrapTMDB.d.ts",
   "files": [
-    "build/src/*.d.ts",
-    "build/src/*.js",
-    "build/src/*.js.map"
+    "publish/**/*.d.ts",
+    "publish/**/*.js",
+    "publish/**/*.js.map"
   ],
   "license": "MIT",
   "keywords": [],
@@ -23,9 +23,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "gts lint",
     "clean": "gts clean",
-    "compile": "tsc",
     "fix": "gts fix",
-    "prepublish": "npm run build",
+    "prepublish": "npm run preBuild",
+    "prebuild": "tsc -p prebuild.json & del \"publish\\src\\index.d.ts\" & del /s /q \"publish\\src\\index.js\" & del /s /q \"publish\\src\\index.js.map\"",
     "build": "tsc -p tsconfig.json"
   },
   "devDependencies": {

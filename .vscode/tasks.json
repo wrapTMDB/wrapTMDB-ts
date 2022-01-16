@@ -19,10 +19,27 @@
 			"label": "tsc: build - tsconfig.json"
 		},
 		{
-			"label": "dev",
-			"dependsOrder": "sequence",
-			"dependsOn": ["tsc: build - tsconfig.json"]
+			"label": "tsc: build - preBuild.json",
+			"type": "shell",
+			"command":"tsc",
+			"args": ["-p","preBuild.json"],
+			
+			"group": "build"
 		},
-
+		{
+			"label": "npm: preBulid",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"tsc: build - preBuild.json",
+			],
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build",
+			"detail": "tsc -p tsconfig.json"
+		}
 	]
 }
