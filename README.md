@@ -74,17 +74,17 @@ ___
 ```Typescript
 data = await wrapTMDB.Movies.GetDetails(624860);
 ```
-![alt text](172714.png)
+![alt text](docs/172714.png)
 
 ```Typescript
 data = await wrapTMDB.Collections.GetTranslations(654321, 'en-US');
 ```
-![alt text](172927.png)
+![alt text](docs/172927.png)
 
 ```Typescript
 data = await wrapTMDB.TVseasons.GetImages(54321, 65421, 'en-US');
 ```
-![alt text](172331.png)
+![alt text](docs/172331.png)
 
 
 
