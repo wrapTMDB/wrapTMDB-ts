@@ -25,7 +25,6 @@ export class TVepisodesgroups {
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/tv-episode-groups/get-tv-episode-group-details
    ********************/
-  async GetDetails(id: number | string): Promise<any>;
   async GetDetails(id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();

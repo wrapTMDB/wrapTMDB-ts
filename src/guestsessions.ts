@@ -13,7 +13,7 @@ const baseURL = c_module.GetURL();
 
 export class GuestSessions {
   /********************
-   * 3.GET /guest_session/{guest_session_id}/rated/movies
+   * 1.GET /guest_session/{guest_session_id}/rated/movies
    * @description Get the rated movies for a guest session.
    * @param {number|string} guest_session_id
    * @param {string} language (optional)
@@ -21,7 +21,6 @@ export class GuestSessions {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/guest-sessions/get-guest-session-rated-movies
    ********************/
-  async GetRatedMovies(guest_session_id: string): Promise<any>;
   async GetRatedMovies(
     guest_session_id: string,
     language?: string,
@@ -43,7 +42,7 @@ export class GuestSessions {
     return data.data;
   }
   /********************
-   * 3.GET /guest_session/{guest_session_id}/rated/tv
+   * 2.GET /guest_session/{guest_session_id}/rated/tv
    * @description Get the rated TV shows for a guest session.
    * @param {number|string} guest_session_id
    * @param {string} language (optional)
@@ -51,7 +50,6 @@ export class GuestSessions {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/guest-sessions/get-guest-session-rated-tv-shows
    ********************/
-  async GetRatedTVShows(guest_session_id: string): Promise<any>;
   async GetRatedTVShows(
     guest_session_id: string,
     language?: string,
@@ -81,7 +79,6 @@ export class GuestSessions {
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/guest-sessions/get-guest-session-rated-tv-shows
    ********************/
-  async GetRatedTVEpisodes(guest_session_id: string): Promise<any>;
   async GetRatedTVEpisodes(
     guest_session_id: string,
     language?: string,
