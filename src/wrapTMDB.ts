@@ -306,7 +306,7 @@ export function SetHeader(input: any) {
 //#endregion
 
 // namespace
-export namespace Movie {
+export namespace Movies {
   /********************
    * 1.Get the primary information about a movie.
    * @param {number|string} movie_id  Movie_ID for TMDB
@@ -1245,7 +1245,7 @@ export namespace Certifications {
     return Validator.CERTIFICATIONSGetTVCertifications();
   }
 }
-export namespace Change {
+export namespace Changes {
   /********************
    * 1.Get a list of all of the movie ids that have been changed in the past 24 hours.
    * You can query it for up to 14 days worth of changed IDs at a time with
@@ -1686,7 +1686,7 @@ export namespace Lists {
     return Validator.LISTSDeleteDeleteList(list_id, session_id);
   }
 }
-export namespace Network {
+export namespace Networks {
   /********************
    * 1.Get the details of a network.
    * @param {number|string} network_id
@@ -1713,6 +1713,20 @@ export namespace Network {
    ********************/
   export function GetImages(network_id: string | number) {
     return Validator.NETWORKGetImages(network_id);
+  }
+}
+export namespace Trending {
+  /********************
+   * 1.Get the daily or weekly trending items.
+   * The daily trending list tracks items over the period of a day while items have a 24 hour half life.
+   * The weekly list tracks items over a 7 day period, with a 7 day half life.
+   * @param {string} media_type ("all" || "movie" || "tv" || "person")
+   * @param {string} time_window ("day" || "week")
+   * @returns {any} JSON
+   * @doc https://developers.themoviedb.org/3/trending/get-trending
+   ********************/
+  export function GetTrending(media_type: string, time_window: string) {
+    return Validator.TRENDINGGetTrending(media_type, time_window);
   }
 }
 export namespace People {
@@ -2009,18 +2023,165 @@ export namespace Search {
     );
   }
 }
-export namespace Trending {
+export namespace TVseasons {
   /********************
-   * 1.Get the daily or weekly trending items.
-   * The daily trending list tracks items over the period of a day while items have a 24 hour half life.
-   * The weekly list tracks items over a 7 day period, with a 7 day half life.
-   * @param {string} media_type ("all" || "movie" || "tv" || "person")
-   * @param {string} time_window ("day" || "week")
-   * @returns {any} JSON
-   * @doc https://developers.themoviedb.org/3/trending/get-trending
+   * 1.Get the TV season details by id.
+   * @param {number|string} tv_id
+   * @param {number|string} season_number
+   * @param {string} language (optional)
+   * @param {string} append_to_response (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
    ********************/
-  export function GetTrending(media_type: string, time_window: string) {
-    return Validator.TRENDINGGetTrending(media_type, time_window);
+  export function GetDetails(
+    tv_id: number | string,
+    season_number: number | string,
+    language?: string,
+    append_to_response?: string
+  ) {
+    return Validator.TVSEASONSGetDetails(
+      tv_id,
+      season_number,
+      language,
+      append_to_response
+    );
+  }
+  /********************
+   * 2.Returns all of the user ratings for the season's episodes.
+   * @param {number|string} tv_id
+   * @param {number|string} season_number
+   * @param {string} session_id (optional)
+   * @param {string} guest_session_id (optional)
+   * @param {string} language (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
+   ********************/
+  export function GetAccountStates(
+    tv_id: number | string,
+    season_number: number | string,
+    session_id?: string,
+    guest_session_id?: string,
+    language?: string
+  ) {
+    return Validator.TVSEASONSGetAccountStates(
+      tv_id,
+      season_number,
+      session_id,
+      guest_session_id,
+      language
+    );
+  }
+  /********************
+   * 3.Get the aggregate credits for TV season.
+   * @param {number|string} tv_id
+   * @param {number|string} season_number
+   * @param {string} language (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-aggregate-credits
+   ********************/
+  export function GetAggregateCredits(
+    tv_id: number | string,
+    season_number: number | string,
+    language?: string
+  ) {
+    return Validator.TVSEASONSGetAggregateCredits(
+      tv_id,
+      season_number,
+      language
+    );
+  }
+  /********************
+   * 4.GET /tv/{tv_id}/season/{season_id}/changes
+   * @description Get the changes for a TV season. By default only the last 24 hours are returned.
+   * @param {number|string} season_id
+   * @param {string} start_date (optional)
+   * @param {string} end_date (optional)
+   * @param {number} page (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-changes
+   ********************/
+  export function GetChanges(
+    season_id: number | string,
+    start_date?: string,
+    end_date?: string,
+    page?: number
+  ) {
+    return Validator.TVSEASONSGetChanges(season_id, start_date, end_date, page);
+  }
+  /********************
+   * 5.Get the credits for TV season.
+   * @param {number|string} tv_id
+   * @param {number|string} season_id
+   * @param {string} language (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-credits
+   ********************/
+  export function GetCredits(
+    tv_id: number | string,
+    season_number: number | string,
+    language?: string
+  ) {
+    return Validator.TVSEASONSGetCredits(tv_id, season_number, language);
+  }
+  /********************
+   * 6.Get the TV season details by id.
+   * @param {number|string} tv_id
+   * @param {number|string} season_number
+   * @param {string} language (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
+   ********************/
+  export function GetExternalIDs(
+    tv_id: number | string,
+    season_number: number | string,
+    language?: string
+  ) {
+    return Validator.TVSEASONSGetExternalIDs(tv_id, season_number, language);
+  }
+  /********************
+   * 7.Get the images that belong to a TV season.
+   * @param {number|string} tv_id
+   * @param {number|string} season_number
+   * @param {string} language (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-images
+   ********************/
+  export function GetImages(
+    tv_id: number | string,
+    season_number: number | string,
+    language?: string
+  ) {
+    return Validator.TVSEASONSGetImages(tv_id, season_number, language);
+  }
+  /********************
+   * 8.Get the credits for TV season.
+   * @param {number|string} tv_id
+   * @param {number|string} season_number
+   * @param {string} language (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-translations
+   ********************/
+  export function GetTranslations(
+    tv_id: number | string,
+    season_number: number | string,
+    language?: string
+  ) {
+    return Validator.TVSEASONSGetTranslations(tv_id, season_number, language);
+  }
+  /********************
+   * 9.Get the videos that have been added to a TV season.
+   * @param {number|string} tv_id
+   * @param {number|string} season_number
+   * @param {string} language (optional)
+   * @returns JSON
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-videos
+   ********************/
+  export function GetVideos(
+    tv_id: number | string,
+    season_number: number | string,
+    language?: string
+  ) {
+    return Validator.TVSEASONSGetVideos(tv_id, season_number, language);
   }
 }
 export namespace TVEpisodes {
@@ -2270,167 +2431,6 @@ export namespace TVepisodesgroups {
    ********************/
   export function GetDeatils(id: number | string, language?: string) {
     return Validator.TVEPISODESGROUPSGetDetails(id, language);
-  }
-}
-export namespace TVseason {
-  /********************
-   * 1.Get the TV season details by id.
-   * @param {number|string} tv_id
-   * @param {number|string} season_number
-   * @param {string} language (optional)
-   * @param {string} append_to_response (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
-   ********************/
-  export function GetDetails(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string,
-    append_to_response?: string
-  ) {
-    return Validator.TVSEASONSGetDetails(
-      tv_id,
-      season_number,
-      language,
-      append_to_response
-    );
-  }
-  /********************
-   * 2.Returns all of the user ratings for the season's episodes.
-   * @param {number|string} tv_id
-   * @param {number|string} season_number
-   * @param {string} session_id (optional)
-   * @param {string} guest_session_id (optional)
-   * @param {string} language (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
-   ********************/
-  export function GetAccountStates(
-    tv_id: number | string,
-    season_number: number | string,
-    session_id?: string,
-    guest_session_id?: string,
-    language?: string
-  ) {
-    return Validator.TVSEASONSGetAccountStates(
-      tv_id,
-      season_number,
-      session_id,
-      guest_session_id,
-      language
-    );
-  }
-  /********************
-   * 3.Get the aggregate credits for TV season.
-   * @param {number|string} tv_id
-   * @param {number|string} season_number
-   * @param {string} language (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-aggregate-credits
-   ********************/
-  export function GetAggregateCredits(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string
-  ) {
-    return Validator.TVSEASONSGetAggregateCredits(
-      tv_id,
-      season_number,
-      language
-    );
-  }
-  /********************
-   * 4.GET /tv/{tv_id}/season/{season_id}/changes
-   * @description Get the changes for a TV season. By default only the last 24 hours are returned.
-   * @param {number|string} season_id
-   * @param {string} start_date (optional)
-   * @param {string} end_date (optional)
-   * @param {number} page (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-changes
-   ********************/
-  export function GetChanges(
-    season_id: number | string,
-    start_date?: string,
-    end_date?: string,
-    page?: number
-  ) {
-    return Validator.TVSEASONSGetChanges(season_id, start_date, end_date, page);
-  }
-  /********************
-   * 5.Get the credits for TV season.
-   * @param {number|string} tv_id
-   * @param {number|string} season_id
-   * @param {string} language (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-credits
-   ********************/
-  export function GetCredits(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string
-  ) {
-    return Validator.TVSEASONSGetCredits(tv_id, season_number, language);
-  }
-  /********************
-   * 6.Get the TV season details by id.
-   * @param {number|string} tv_id
-   * @param {number|string} season_number
-   * @param {string} language (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
-   ********************/
-  export function GetExternalIDs(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string
-  ) {
-    return Validator.TVSEASONSGetExternalIDs(tv_id, season_number, language);
-  }
-  /********************
-   * 7.Get the images that belong to a TV season.
-   * @param {number|string} tv_id
-   * @param {number|string} season_number
-   * @param {string} language (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-images
-   ********************/
-  export function GetImages(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string
-  ) {
-    return Validator.TVSEASONSGetImages(tv_id, season_number, language);
-  }
-  /********************
-   * 8.Get the credits for TV season.
-   * @param {number|string} tv_id
-   * @param {number|string} season_number
-   * @param {string} language (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-translations
-   ********************/
-  export function GetTranslations(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string
-  ) {
-    return Validator.TVSEASONSGetTranslations(tv_id, season_number, language);
-  }
-  /********************
-   * 9.Get the videos that have been added to a TV season.
-   * @param {number|string} tv_id
-   * @param {number|string} season_number
-   * @param {string} language (optional)
-   * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-videos
-   ********************/
-  export function GetVideos(
-    tv_id: number | string,
-    season_number: number | string,
-    language?: string
-  ) {
-    return Validator.TVSEASONSGetVideos(tv_id, season_number, language);
   }
 }
 export namespace Watchproviders {
