@@ -8,7 +8,7 @@
 # WrapTMDB-ts  
 <h3>
 <p align="center">
-<a href="/docs/README.md"> English </a>|
+<a href="README.md"> English </a>|
 <a href="/docs/README_ja.md"> 日本語 </a>|
 <a href="/docs/README_zh-tw.md"> 繁體中文 </a>|
 <a href="/docs/README_zh-ch.md"> 简体中文 </a>
@@ -44,7 +44,7 @@ $npm install wraptmdb-ts@latest
 <br/>
 
 ``` Typescript
-import * as wrapTMDB from './wrapTMDB'; // 作为命名空间导入
+import * as wrapTMDB from 'wraptmdb-ts'; // 作为命名空间导入
 
 wrapTMDB.Init('YOUR api_key');        //开始前先初始化你的TOKEN_key。
 wrapTMDB.SetHeader({                  //设置标头（可选但推荐）
