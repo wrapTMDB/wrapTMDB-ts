@@ -60,7 +60,6 @@ const tvseasons_entry = new tvseasons_module.TVseason();
 const watchproviders_entry = new watchproviders_module.Watchproviders();
 const Validator = new Proxy(
   {
-    GetToken: GetToken,
     //#region Movie:23
     MOVIEGetDetails: movie_entry.GetDetails,
     MOVIEGetAccountStates: movie_entry.GetAccountStates,
@@ -289,7 +288,13 @@ export function Init(token: string) {
  * @returns {string} Common.TOKEN
  ********************/
 export function GetToken(): string {
-  return Validator.GetToken();
+  const result = c_module.GetToken();
+  if (result === '') {
+    throw new Error(
+      'Error: non-TOKEN, Call "Init" function at first before calling other functions'
+    );
+  }
+  return result;
 }
 /********************
  * Header: Set HTTP header, it's optional, but should have it.
@@ -315,10 +320,7 @@ export namespace Movies {
    *          wraptmdb.MOVIE.GetDetails(624860,'en-US');
    * @doc https://developers.themoviedb.org/3/movies/get-movie-details
    ********************/
-  export function GetDetails(
-    movie_id: number | string,
-    language?: string
-  ): any {
+  export function GetDetails(movie_id: number | string, language?: string) {
     return Validator.MOVIEGetDetails(movie_id, language);
   }
   /********************

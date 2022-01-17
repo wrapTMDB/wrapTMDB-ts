@@ -56,7 +56,7 @@ async function main() {
   let data = {};
   try {
     //using as a promise function
-    data = await wrapTMDB.Movie.GetDetails(624860); 
+    data = await wrapTMDB.Movies.GetDetails(624860); 
   } catch (err) {
     console.error(err);
   }

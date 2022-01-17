@@ -29,6 +29,9 @@ export class Movie {
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -57,10 +60,13 @@ export class Movie {
       movie_id +
       '/account_states' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -84,7 +90,7 @@ export class Movie {
       movie_id +
       '/alternative_titles' +
       `?api_key=${token}`;
-    if (country !== '' || country !== undefined)
+    if (country !== '' && country !== undefined)
       targetURL += `&country=${country}`;
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -114,9 +120,9 @@ export class Movie {
       movie_id +
       '/changes' +
       `?api_key=${token}`;
-    if (start_date !== '' || start_date !== undefined)
+    if (start_date !== '' && start_date !== undefined)
       targetURL += `&start_date=${start_date}`;
-    if (end_date !== '' || end_date !== undefined)
+    if (end_date !== '' && end_date !== undefined)
       targetURL += `&end_date=${start_date}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
@@ -454,9 +460,9 @@ export class Movie {
       movie_id +
       '/rating' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
+    if (guest_session_id !== '' && guest_session_id !== undefined)
       targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
     const header = {
       api_key: token,
@@ -488,9 +494,9 @@ export class Movie {
       movie_id +
       '/rating' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
+    if (guest_session_id !== '' && guest_session_id !== undefined)
       targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
     await axios.delete(targetURL, header);
     /*no respone*/
