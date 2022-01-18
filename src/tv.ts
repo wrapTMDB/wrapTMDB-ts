@@ -24,10 +24,13 @@ export class TV {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
-      baseURL + c_module.Route.TV + '/' + tv_id + `?api_key=${token}`;
+      baseURL + c_module.Route.TV + tv_id + `?api_key=${token}`;
 
     if (language !== undefined) {
       targetURL += `&language=${language}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -57,10 +60,14 @@ export class TV {
       tv_id +
       '/account_states' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
+
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -86,8 +93,11 @@ export class TV {
       tv_id +
       '/aggregate_credits' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -111,8 +121,11 @@ export class TV {
       tv_id +
       '/alternative_titles' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -137,12 +150,15 @@ export class TV {
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.TV + tv_id + '/changes' + `?api_key=${token}`;
-    if (start_date !== '' || start_date !== undefined)
+    if (start_date !== '' && start_date !== undefined)
       targetURL += `&start_date=${start_date}`;
-    if (end_date !== '' || end_date !== undefined)
+    if (end_date !== '' && end_date !== undefined)
       targetURL += `&end_date=${end_date}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -170,6 +186,9 @@ export class TV {
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -188,6 +207,9 @@ export class TV {
       baseURL + c_module.Route.TV + tv_id + '/credits' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -217,6 +239,9 @@ export class TV {
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -243,6 +268,9 @@ export class TV {
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -263,6 +291,9 @@ export class TV {
       targetURL += `&language=${language}`;
     }
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -278,6 +309,9 @@ export class TV {
     const header = c_module.GetHeader();
     const targetURL: string =
       baseURL + c_module.Route.TV + tv_id + '/keywords' + `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -309,6 +343,9 @@ export class TV {
     if (page !== undefined) {
       targetURL += `&page=${page}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -336,6 +373,9 @@ export class TV {
     if (page !== undefined) {
       targetURL += `&page=${page}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -355,6 +395,9 @@ export class TV {
       '/screened_theatrically' +
       `?api_key=${token}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -367,11 +410,6 @@ export class TV {
    * @param {number} page (optional)
    * @doc https://developers.themoviedb.org/3/tv/get-similar-tv-shows
    ********************/
-  async GetSimilarTVShows(tv_id: number | string): Promise<any>;
-  async GetSimilarTVShows(
-    tv_id: number | string,
-    language: string
-  ): Promise<any>;
   async GetSimilarTVShows(
     tv_id: number | string,
     language?: string,
@@ -386,6 +424,9 @@ export class TV {
     }
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -405,6 +446,9 @@ export class TV {
       tv_id +
       '/translations' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -422,6 +466,9 @@ export class TV {
       baseURL + c_module.Route.TV + tv_id + '/videos' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -444,6 +491,9 @@ export class TV {
       tv_id +
       '/watch/providers' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -469,14 +519,18 @@ export class TV {
     const token = c_module.GetToken();
     let targetURL: string =
       baseURL + c_module.Route.TV + tv_id + '/rating' + `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
+
     const header = {
       api_key: token,
     };
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.post(targetURL, query, header);
     return data.data;
   }
@@ -499,11 +553,16 @@ export class TV {
     const baseURL = c_module.GetURL();
     let targetURL: string =
       baseURL + c_module.Route.TV + tv_id + '/rating' + `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
-    await axios.delete(targetURL, header);
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
+
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
+    const data: any = await axios.delete(targetURL, header);
+    return data.data;
     /*no respone*/
   }
   /********************
@@ -516,9 +575,12 @@ export class TV {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
-      baseURL + c_module.Route.TV + '/latest' + `?api_key=${token}`;
+      baseURL + c_module.Route.TV + 'latest' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -536,12 +598,15 @@ export class TV {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
-      baseURL + c_module.Route.TV + '/airing_today' + `?api_key=${token}`;
+      baseURL + c_module.Route.TV + 'airing_today' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -558,12 +623,15 @@ export class TV {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
-      baseURL + c_module.Route.TV + '/on_the_air' + `?api_key=${token}`;
+      baseURL + c_module.Route.TV + 'on_the_air' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -579,7 +647,7 @@ export class TV {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
-      baseURL + c_module.Route.TV + '/popular' + `?api_key=${token}`;
+      baseURL + c_module.Route.TV + 'popular' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
@@ -587,6 +655,9 @@ export class TV {
       targetURL += `&page=${page}`;
     }
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -601,12 +672,15 @@ export class TV {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
-      baseURL + c_module.Route.TV + '/top_rated' + `?api_key=${token}`;
+      baseURL + c_module.Route.TV + 'top_rated' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;

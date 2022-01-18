@@ -100,7 +100,7 @@ function GetReturnString(basic: string, parms: string[], value: any): string {
 }
 //#endregion
 
-describe('Get URLs that funciton request:', () => {
+describe('Get URLs that funciton request: Movie', () => {
   test('Movies.GetDetails', async () => {
     const parms = GetParams(movie_entry.GetDetails);
     const cases = [
@@ -724,207 +724,665 @@ describe('Get URLs that funciton request:', () => {
     });
   });
 });
+describe('Get URLs that funciton request: TV', () => {
+  test('tv.GetDetails', () => {
+    const parems = GetParams(tv_entry.GetDetails);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetDetails(element.tv_id, element.language)).toBe(
+        answer
+      );
+    });
+  });
+  test('tv.GetAccountStates', () => {
+    const parems = GetParams(tv_entry.GetAccountStates);
+    const cases = [
+      {
+        tv_id: 624860,
+        session_id: 'asdas',
+      },
+      {
+        tv_id: 62486065463521864631233843384,
+        session_id: 'gsfgerersfg',
+        guest_session_id: 'asdawduhanlfslilerk',
+      },
+      {
+        tv_id: 62486065463521864631233843384,
+        session_id: 'dasgsfgerersfg',
+        guest_session_id: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/account_states',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetAccountStates(
+          element.tv_id,
+          element.session_id,
+          element.guest_session_id
+        )
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetAggregateCredits', () => {
+    const parems = GetParams(tv_entry.GetAggregateCredits);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/aggregate_credits',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetAggregateCredits(element.tv_id, element.language)
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetAlternativetitles', () => {
+    const parems = GetParams(tv_entry.GetAlternativetitles);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/alternative_titles',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetAlternativetitles(element.tv_id, element.language)
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetChanges', () => {
+    const parems = GetParams(tv_entry.GetChanges);
+    const cases = [
+      {
+        tv_id: 454866321,
+        start_date: '10-25',
+        end_date: '11-06',
+        page: 1,
+      },
+      {
+        tv_id: 454866321,
+        start_date: undefined,
+        end_date: '8-21',
+      },
+      {
+        tv_id: 454866321,
+        start_date: undefined,
+        end_date: undefined,
+        page: undefined,
+      },
+      {
+        tv_id: 454866321,
+        start_date: undefined,
+        end_date: undefined,
+        page: 1,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/changes',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetChanges(
+          element.tv_id,
+          element.start_date,
+          element.end_date,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetContentRatings', () => {
+    const parems = GetParams(tv_entry.GetContentRatings);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/content_ratings',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetContentRatings(element.tv_id, element.language)
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetCredits', () => {
+    const parems = GetParams(tv_entry.GetCredits);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/credits',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetCredits(element.tv_id, element.language)).toBe(
+        answer
+      );
+    });
+  });
+  test('tv.GetEpisodeGroup', () => {
+    const parems = GetParams(tv_entry.GetEpisodeGroup);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/episode_groups',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetEpisodeGroup(element.tv_id, element.language)
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetExternalIDs', () => {
+    const parems = GetParams(tv_entry.GetExternalIDs);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/external_ids',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetExternalIDs(element.tv_id, element.language)
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetImages', () => {
+    const parems = GetParams(tv_entry.GetImages);
+    const cases = [
+      {
+        tv_id: 454866321,
+        language: undefined,
+      },
+      {
+        tv_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        tv_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/images',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetImages(element.tv_id, element.language)).toBe(
+        answer
+      );
+    });
+  });
+  test('tv.GetKeywords', () => {
+    const parems = GetParams(tv_entry.GetKeywords);
+    const cases = [
+      {
+        tv_id: 454866321,
+      },
+      {
+        tv_id: 866321,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/keywords',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetKeywords(element.tv_id)).toBe(answer);
+    });
+  });
+  test('tv.GetRecommendations', () => {
+    const parems = GetParams(tv_entry.GetRecommendations);
+    const cases = [
+      {
+        tv_id: 531846,
+      },
+      {
+        tv_id: 5314,
+        language: 'en_US',
+        page: 654,
+      },
+      {
+        tv_id: 5314,
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/recommendations',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetRecommendations(
+          element.tv_id,
+          element.language,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetReviews', () => {
+    const parems = GetParams(tv_entry.GetReviews);
+    const cases = [
+      {
+        tv_id: 531846,
+      },
+      {
+        tv_id: 5314,
+        language: 'en_US',
+        page: 654,
+      },
+      {
+        tv_id: 5314,
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/reviews',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetReviews(element.tv_id, element.language, element.page)
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetScreenedTheatrically', () => {
+    const parems = GetParams(tv_entry.GetScreenedTheatrically);
+    const cases = [
+      {
+        tv_id: 454866321,
+      },
+      {
+        tv_id: 866321,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/screened_theatrically',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetScreenedTheatrically(element.tv_id)).toBe(
+        answer
+      );
+    });
+  });
+  test('tv.GetSimilarTVShows', () => {
+    const parems = GetParams(tv_entry.GetSimilarTVShows);
+    const cases = [
+      {
+        tv_id: 531846,
+      },
+      {
+        tv_id: 5314,
+        language: 'en_US',
+        page: 654,
+      },
+      {
+        tv_id: 5314,
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/similar',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetSimilarTVShows(
+          element.tv_id,
+          element.language,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetTranslations', () => {
+    const parems = GetParams(tv_entry.GetTranslations);
+    const cases = [
+      {
+        tv_id: 454866321,
+      },
+      {
+        tv_id: 866321,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/translations',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetTranslations(element.tv_id)).toBe(answer);
+    });
+  });
+  test('tv.GetVideos', () => {
+    const parems = GetParams(tv_entry.GetVideos);
+    const cases = [
+      {
+        tv_id: 531846,
+      },
+      {
+        tv_id: 5314,
+        language: 'en_US',
+      },
+      {
+        tv_id: 5314,
+        language: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/videos',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetVideos(element.tv_id, element.language)).toBe(
+        answer
+      );
+    });
+  });
+  test('tv.GetWatchProviders', () => {
+    const parems = GetParams(tv_entry.GetWatchProviders);
+    const cases = [
+      {
+        tv_id: 454866321,
+      },
+      {
+        tv_id: 866321,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/watch/providers',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetWatchProviders(element.tv_id)).toBe(answer);
+    });
+  });
+  test('tv.PostRateTVShow', () => {
+    const parems = GetParams(tv_entry.PostRateTVShow);
+    const cases = [
+      {
+        tv_id: 531846,
+        session_id: '548941368',
+        guest_session_id: '31561',
+      },
+      {
+        tv_id: 8746,
+        session_id: '548941368',
+        guest_session_id: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/rating',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.PostRateTVShow(
+          element.tv_id,
+          {},
+          element.session_id,
+          element.guest_session_id
+        )
+      ).toBe(answer);
+    });
+  });
+  test('tv.DeleteRating', () => {
+    const parems = GetParams(tv_entry.DeleteRating);
+    const cases = [
+      {
+        tv_id: 531846,
+        session_id: '548941368',
+        guest_session_id: '31561',
+      },
+      {
+        tv_id: 8746,
+        session_id: '541368',
+        guest_session_id: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + '{tv_id}' + '/rating',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.DeleteRating(
+          element.tv_id,
+          element.session_id,
+          element.guest_session_id
+        )
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetLatest', () => {
+    const parems = GetParams(tv_entry.GetLatest);
+    const cases = [
+      {
+        language: 'string',
+      },
+      {},
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + 'latest',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetLatest(element.language)).toBe(answer);
+    });
+  });
+  test('tv.GetTVAiringToday', () => {
+    const parems = GetParams(tv_entry.GetTVAiringToday);
+    const cases = [
+      {
+        language: 'en_US',
+      },
+      {
+        language: undefined,
+        page: 654,
+      },
+      {},
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + 'airing_today',
+        parems,
+        element
+      );
+      expect(
+        await tv_entry.GetTVAiringToday(element.language, element.page)
+      ).toBe(answer);
+    });
+  });
+  test('tv.GetTVOnTheAir', () => {
+    const parems = GetParams(tv_entry.GetTVOnTheAir);
+    const cases = [
+      {
+        language: 'en_US',
+      },
+      {
+        language: undefined,
+        page: 654,
+      },
+      {},
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + 'on_the_air',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetTVOnTheAir(element.language, element.page)).toBe(
+        answer
+      );
+    });
+  });
+  test('tv.GetPopular', () => {
+    const parems = GetParams(tv_entry.GetPopular);
+    const cases = [
+      {
+        language: 'en_US',
+      },
+      {
+        language: undefined,
+        page: 654,
+      },
+      {},
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + 'popular',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetPopular(element.language, element.page)).toBe(
+        answer
+      );
+    });
+  });
+  test('tv.GetTopRated', () => {
+    const parems = GetParams(tv_entry.GetTopRated);
+    const cases = [
+      {
+        language: 'en_US',
+      },
+      {
+        language: undefined,
+        page: 654,
+      },
+      {},
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.TV + 'top_rated',
+        parems,
+        element
+      );
+      expect(await tv_entry.GetTopRated(element.language, element.page)).toBe(
+        answer
+      );
+    });
+  });
+});
 
-// test('tv.GetDetails', () => {
-//   const parems = GetParams(tv_entry.GetDetails);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetDetails()).toBe(answer);
-//   });
-// });
-// test('tv.GetAccountStates', () => {
-//   const parems = GetParams(tv_entry.GetAccountStates);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetAccountStates()).toBe(answer);
-//   });
-// });
-// test('tv.GetAggregateCredits', () => {
-//   const parems = GetParams(tv_entry.GetAggregateCredits);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetAggregateCredits()).toBe(answer);
-//   });
-// });
-// test('tv.GetAlternativetitles', () => {
-//   const parems = GetParams(tv_entry.GetAlternativetitles);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetAlternativetitles()).toBe(answer);
-//   });
-// });
-// test('tv.GetChanges', () => {
-//   const parems = GetParams(tv_entry.GetChanges);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetChanges()).toBe(answer);
-//   });
-// });
-// test('tv.GetContentRatings', () => {
-//   const parems = GetParams(tv_entry.GetContentRatings);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetContentRatings()).toBe(answer);
-//   });
-// });
-// test('tv.GetCredits', () => {
-//   const parems = GetParams(tv_entry.GetCredits);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetCredits()).toBe(answer);
-//   });
-// });
-// test('tv.GetEpisodeGroup', () => {
-//   const parems = GetParams(tv_entry.GetEpisodeGroup);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetEpisodeGroup()).toBe(answer);
-//   });
-// });
-// test('tv.GetExternalIDs', () => {
-//   const parems = GetParams(tv_entry.GetExternalIDs);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetExternalIDs()).toBe(answer);
-//   });
-// });
-// test('tv.GetImages', () => {
-//   const parems = GetParams(tv_entry.GetImages);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetImages()).toBe(answer);
-//   });
-// });
-// test('tv.GetKeywords', () => {
-//   const parems = GetParams(tv_entry.GetKeywords);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetKeywords()).toBe(answer);
-//   });
-// });
-// test('tv.GetRecommendations', () => {
-//   const parems = GetParams(tv_entry.GetRecommendations);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetRecommendations()).toBe(answer);
-//   });
-// });
-// test('tv.GetReviews', () => {
-//   const parems = GetParams(tv_entry.GetReviews);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetReviews()).toBe(answer);
-//   });
-// });
-// test('tv.GetScreenedTheatrically', () => {
-//   const parems = GetParams(tv_entry.GetScreenedTheatrically);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetScreenedTheatrically()).toBe(answer);
-//   });
-// });
-// test('tv.GetSimilarTVShows', () => {
-//   const parems = GetParams(tv_entry.GetSimilarTVShows);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetSimilarTVShows()).toBe(answer);
-//   });
-// });
-// test('tv.GetTranslations', () => {
-//   const parems = GetParams(tv_entry.GetTranslations);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetTranslations()).toBe(answer);
-//   });
-// });
-// test('tv.GetVideos', () => {
-//   const parems = GetParams(tv_entry.GetVideos);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetVideos()).toBe(answer);
-//   });
-// });
-// test('tv.GetWatchProviders', () => {
-//   const parems = GetParams(tv_entry.GetWatchProviders);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetWatchProviders()).toBe(answer);
-//   });
-// });
-// test('tv.PostRateTVShow', () => {
-//   const parems = GetParams(tv_entry.PostRateTVShow);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.PostRateTVShow()).toBe(answer);
-//   });
-// });
-// test('tv.DeleteRating', () => {
-//   const parems = GetParams(tv_entry.DeleteRating);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.DeleteRating()).toBe(answer);
-//   });
-// });
-// test('tv.GetLatest', () => {
-//   const parems = GetParams(tv_entry.GetLatest);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetLatest()).toBe(answer);
-//   });
-// });
-// test('tv.GetTVAiringToday', () => {
-//   const parems = GetParams(tv_entry.GetTVAiringToday);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetTVAiringToday()).toBe(answer);
-//   });
-// });
-// test('tv.GetTVOnTheAir', () => {
-//   const parems = GetParams(tv_entry.GetTVOnTheAir);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetTVOnTheAir()).toBe(answer);
-//   });
-// });
-// test('tv.GetPopular', () => {
-//   const parems = GetParams(tv_entry.GetPopular);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetPopular()).toBe(answer);
-//   });
-// });
-// test('tv.GetTopRated', () => {
-//   const parems = GetParams(tv_entry.GetTopRated);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await tv_entry.GetTopRated()).toBe(answer);
-//   });
-// });
 // test('account.GetDetails', () => {
 //   const parems = GetParams(account_entry.GetDetails);
 //   const cases = [];
