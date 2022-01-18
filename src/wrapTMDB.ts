@@ -67,7 +67,7 @@ const Validator = new Proxy(
     MOVIEGetChanges: movie_entry.GetChanges,
     MOVIEGetCredits: movie_entry.GetCredits,
     MOVIEGetExternalIDs: movie_entry.GetExternalIDs,
-    MOVIEGetImage: movie_entry.GetImage,
+    MOVIEGetImage: movie_entry.GetImages,
     MOVIEGetKeywords: movie_entry.GetKeywords,
     MOVIEGetLists: movie_entry.GetLists,
     MOVIEGetRecommendations: movie_entry.GetRecommendations,

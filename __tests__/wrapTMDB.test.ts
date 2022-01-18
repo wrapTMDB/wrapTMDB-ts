@@ -90,7 +90,8 @@ function GetReturnString(basic: string, parms: string[], value: any): string {
       continue;
     }
     /* 如果有{}標籤 則使用替代方法 */
-    if (basic.includes(value[parms[i]])) {
+    if (basic.includes('{' + parms[i] + '}')) {
+      basic = basic.replace('{' + parms[i] + '}', value[parms[i]]);
       continue;
     }
     result += '&' + parms[i] + '=' + value[parms[i]];
@@ -118,7 +119,7 @@ describe('Get URLs that funciton request:', () => {
 
     cases.forEach(async element => {
       const answer = GetReturnString(
-        `${URL}` + c_module.Route.MOVIE + element.movie_id,
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}',
         parms,
         element
       );
@@ -148,7 +149,7 @@ describe('Get URLs that funciton request:', () => {
     ];
     cases.forEach(async element => {
       const answer = GetReturnString(
-        `${URL}` + c_module.Route.MOVIE + element.movie_id + '/account_states',
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/account_states',
         parems,
         element
       );
@@ -161,176 +162,569 @@ describe('Get URLs that funciton request:', () => {
       ).toBe(answer);
     });
   });
+  test('movie.GetAlternativetitles', async () => {
+    const parems = GetParams(movie_entry.GetAlternativetitles);
+    const cases = [
+      {
+        movie_id: 624860654643384,
+        country: 'asdawfz',
+      },
+      {
+        movie_id: 34476861215,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/alternative_titles',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetAlternativetitles(
+          element.movie_id,
+          element.country
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetChanges', async () => {
+    const parems = GetParams(movie_entry.GetChanges);
+    const cases = [
+      {
+        movie_id: 454866321,
+        start_date: '10-25',
+        end_date: '11-06',
+        page: 1,
+      },
+      {
+        movie_id: 454866321,
+        start_date: undefined,
+        end_date: '8-21',
+      },
+      {
+        movie_id: 454866321,
+        start_date: undefined,
+        end_date: undefined,
+        page: undefined,
+      },
+      {
+        movie_id: 454866321,
+        start_date: undefined,
+        end_date: undefined,
+        page: 1,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/changes',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetChanges(
+          element.movie_id,
+          element.start_date,
+          element.end_date,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetCredits', async () => {
+    const parems = GetParams(movie_entry.GetCredits);
+    const cases = [
+      {
+        movie_id: 454866321,
+        language: undefined,
+      },
+      {
+        movie_id: 454866321,
+        language: 'en_US',
+      },
+      {
+        movie_id: 454866321,
+        language: 'none_language',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/credits',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetCredits(element.movie_id, element.language)
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetExternalIDs', async () => {
+    const parems = GetParams(movie_entry.GetExternalIDs);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/external_ids',
+        parems,
+        element
+      );
+      expect(await movie_entry.GetExternalIDs(element.movie_id)).toBe(answer);
+    });
+  });
+  test('movie.GetImage', async () => {
+    const parems = GetParams(movie_entry.GetImages);
+    const cases = [
+      {
+        movie_id: 531846,
+        language: 'en_US',
+        include_image_language: 'zh-CN',
+      },
+      {
+        movie_id: 531846,
+        language: undefined,
+        include_image_language: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/images',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetImages(
+          element.movie_id,
+          element.language,
+          element.include_image_language
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetKeywords', async () => {
+    const parems = GetParams(movie_entry.GetKeywords);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/keywords',
+        parems,
+        element
+      );
+      expect(await movie_entry.GetKeywords(element.movie_id)).toBe(answer);
+    });
+  });
+  test('movie.GetLists', async () => {
+    const parems = GetParams(movie_entry.GetLists);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+      {
+        movie_id: 5314,
+        language: 'en_US',
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/lists',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetLists(
+          element.movie_id,
+          element.language,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetRecommendations', async () => {
+    const parems = GetParams(movie_entry.GetRecommendations);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+      {
+        movie_id: 5314,
+        language: 'en_US',
+        page: 654,
+      },
+      {
+        movie_id: 5314,
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/recommendations',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetRecommendations(
+          element.movie_id,
+          element.language,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetReleaseDates', async () => {
+    const parems = GetParams(movie_entry.GetReleaseDates);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/release_dates',
+        parems,
+        element
+      );
+      expect(await movie_entry.GetReleaseDates(element.movie_id)).toBe(answer);
+    });
+  });
+  test('movie.GetReviews', async () => {
+    const parems = GetParams(movie_entry.GetReviews);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+      {
+        movie_id: 5314,
+        language: undefined,
+        page: 654,
+      },
+      {
+        movie_id: 51654,
+        language: 'undefined',
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/reviews',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetReviews(
+          element.movie_id,
+          element.language,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetSimilar', async () => {
+    const parems = GetParams(movie_entry.GetSimilar);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+      {
+        movie_id: 51654,
+        language: 'undefined',
+        page: 654,
+      },
+      {
+        movie_id: 51654,
+        language: 'asdwfxghe',
+        page: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/similar',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetSimilar(
+          element.movie_id,
+          element.language,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetTranslations', async () => {
+    const parems = GetParams(movie_entry.GetTranslations);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+
+      {
+        movie_id: 51654,
+        language: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/translations',
+        parems,
+        element
+      );
+      expect(await movie_entry.GetTranslations(element.movie_id)).toBe(answer);
+    });
+  });
+  test('movie.GetVideos', async () => {
+    const parems = GetParams(movie_entry.GetVideos);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+      {
+        movie_id: 51654,
+        language: 'asdwfxghe',
+      },
+      {
+        movie_id: 51654,
+        language: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/videos',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetVideos(element.movie_id, element.language)
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetWatchProviders', async () => {
+    const parems = GetParams(movie_entry.GetWatchProviders);
+    const cases = [
+      {
+        movie_id: 531846,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/watch/providers',
+        parems,
+        element
+      );
+      expect(await movie_entry.GetWatchProviders(element.movie_id)).toBe(
+        answer
+      );
+    });
+  });
+  test('movie.PostRateMovie', async () => {
+    const parems = GetParams(movie_entry.PostRateMovie);
+    const cases = [
+      {
+        movie_id: 531846,
+        session_id: '548941368',
+        guest_session_id: '31561',
+      },
+      {
+        movie_id: 531846,
+        session_id: '548941368',
+        guest_session_id: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/rating',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.PostRateMovie(
+          element.movie_id,
+          {},
+          element.session_id,
+          element.guest_session_id
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.DeleteRating', async () => {
+    const parems = GetParams(movie_entry.DeleteRating);
+    const cases = [
+      {
+        movie_id: 531846,
+        session_id: '548941368',
+        guest_session_id: '31561',
+      },
+      {
+        movie_id: 531846,
+        session_id: '548941368',
+        guest_session_id: undefined,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + '{movie_id}' + '/rating',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.DeleteRating(
+          element.movie_id,
+          element.session_id,
+          element.guest_session_id
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetLatest', async () => {
+    const parems = GetParams(movie_entry.GetLatest);
+    const cases = [
+      {
+        language: 'string',
+      },
+      {},
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + 'latest',
+        parems,
+        element
+      );
+      expect(await movie_entry.GetLatest(element.language)).toBe(answer);
+    });
+  });
+  test('movie.GetNowPlaying', async () => {
+    const parems = GetParams(movie_entry.GetNowPlaying);
+    const cases = [
+      {
+        language: 'string',
+      },
+      {},
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + 'now_playing',
+        parems,
+        element
+      );
+      expect(await movie_entry.GetNowPlaying(element.language)).toBe(answer);
+    });
+  });
+  test('movie.GetPopular', async () => {
+    const parems = GetParams(movie_entry.GetPopular);
+    const cases = [
+      {
+        language: 'string',
+        page: 446512,
+        region: 'string',
+      },
+      {
+        language: 'string',
+        region: 'string',
+      },
+      {
+        page: 446512,
+        region: 'string',
+      },
+      {
+        language: 'string',
+        page: 132,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + 'popular',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetPopular(
+          element.language,
+          element.page,
+          element.region
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetTopRated', async () => {
+    const parems = GetParams(movie_entry.GetTopRated);
+    const cases = [
+      {
+        language: 'string',
+        page: 446512,
+        region: 'string',
+      },
+      {
+        language: 'string',
+        region: 'string',
+      },
+      {
+        page: 446512,
+        region: 'string',
+      },
+      {
+        language: 'string',
+        page: 132,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + 'top_rated',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetTopRated(
+          element.language,
+          element.page,
+          element.region
+        )
+      ).toBe(answer);
+    });
+  });
+  test('movie.GetUpcoming', async () => {
+    const parems = GetParams(movie_entry.GetUpcoming);
+    const cases = [
+      {
+        language: 'string',
+        page: 446512,
+        region: 'string',
+      },
+      {
+        language: 'string',
+        region: 'string',
+      },
+      {
+        page: 446512,
+        region: 'string',
+      },
+      {
+        language: 'string',
+        page: 132,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.MOVIE + 'upcoming',
+        parems,
+        element
+      );
+      expect(
+        await movie_entry.GetUpcoming(
+          element.language,
+          element.page,
+          element.region
+        )
+      ).toBe(answer);
+    });
+  });
 });
 
-// test('movie.GetAlternativetitles', () => {
-//   const parems = GetParams(movie_entry.GetAlternativetitles);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetAlternativetitles()).toBe(answer);
-//   });
-// });
-// test('movie.GetChanges', () => {
-//   const parems = GetParams(movie_entry.GetChanges);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetChanges()).toBe(answer);
-//   });
-// });
-// test('movie.GetCredits', () => {
-//   const parems = GetParams(movie_entry.GetCredits);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetCredits()).toBe(answer);
-//   });
-// });
-// test('movie.GetExternalIDs', () => {
-//   const parems = GetParams(movie_entry.GetExternalIDs);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetExternalIDs()).toBe(answer);
-//   });
-// });
-// test('movie.GetImage', () => {
-//   const parems = GetParams(movie_entry.GetImage);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetImage()).toBe(answer);
-//   });
-// });
-// test('movie.GetKeywords', () => {
-//   const parems = GetParams(movie_entry.GetKeywords);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetKeywords()).toBe(answer);
-//   });
-// });
-// test('movie.GetLists', () => {
-//   const parems = GetParams(movie_entry.GetLists);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetLists()).toBe(answer);
-//   });
-// });
-// test('movie.GetRecommendations', () => {
-//   const parems = GetParams(movie_entry.GetRecommendations);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetRecommendations()).toBe(answer);
-//   });
-// });
-// test('movie.GetReleaseDates', () => {
-//   const parems = GetParams(movie_entry.GetReleaseDates);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetReleaseDates()).toBe(answer);
-//   });
-// });
-// test('movie.GetReviews', () => {
-//   const parems = GetParams(movie_entry.GetReviews);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetReviews()).toBe(answer);
-//   });
-// });
-// test('movie.GetSimilar', () => {
-//   const parems = GetParams(movie_entry.GetSimilar);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetSimilar()).toBe(answer);
-//   });
-// });
-// test('movie.GetTranslations', () => {
-//   const parems = GetParams(movie_entry.GetTranslations);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetTranslations()).toBe(answer);
-//   });
-// });
-// test('movie.GetVideos', () => {
-//   const parems = GetParams(movie_entry.GetVideos);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetVideos()).toBe(answer);
-//   });
-// });
-// test('movie.GetWatchProviders', () => {
-//   const parems = GetParams(movie_entry.GetWatchProviders);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetWatchProviders()).toBe(answer);
-//   });
-// });
-// test('movie.PostRateMovie', () => {
-//   const parems = GetParams(movie_entry.PostRateMovie);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.PostRateMovie()).toBe(answer);
-//   });
-// });
-// test('movie.DeleteRating', () => {
-//   const parems = GetParams(movie_entry.DeleteRating);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.DeleteRating()).toBe(answer);
-//   });
-// });
-// test('movie.GetLatest', () => {
-//   const parems = GetParams(movie_entry.GetLatest);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetLatest()).toBe(answer);
-//   });
-// });
-// test('movie.GetNowPlaying', () => {
-//   const parems = GetParams(movie_entry.GetNowPlaying);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetNowPlaying()).toBe(answer);
-//   });
-// });
-// test('movie.GetPopular', () => {
-//   const parems = GetParams(movie_entry.GetPopular);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetPopular()).toBe(answer);
-//   });
-// });
-// test('movie.GetTopRated', () => {
-//   const parems = GetParams(movie_entry.GetTopRated);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetTopRated()).toBe(answer);
-//   });
-// });
-// test('movie.GetUpcoming', () => {
-//   const parems = GetParams(movie_entry.GetUpcoming);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await movie_entry.GetUpcoming()).toBe(answer);
-//   });
-// });
 // test('tv.GetDetails', () => {
 //   const parems = GetParams(tv_entry.GetDetails);
 //   const cases = [];
