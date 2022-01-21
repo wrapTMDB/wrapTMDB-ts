@@ -1383,94 +1383,395 @@ describe('Get URLs that funciton request: TV', () => {
   });
 });
 
-// test('account.GetDetails', () => {
-//   const parems = GetParams(account_entry.GetDetails);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetDetails()).toBe(answer);
-//   });
-// });
-// test('account.GetCreatedLists', () => {
-//   const parems = GetParams(account_entry.GetCreatedLists);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetCreatedLists()).toBe(answer);
-//   });
-// });
-// test('account.GetFavoriteMovies', () => {
-//   const parems = GetParams(account_entry.GetFavoriteMovies);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetFavoriteMovies()).toBe(answer);
-//   });
-// });
-// test('account.GetFavoriteTVShows', () => {
-//   const parems = GetParams(account_entry.GetFavoriteTVShows);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetFavoriteTVShows()).toBe(answer);
-//   });
-// });
-// test('account.PostMarkAsFavorite', () => {
-//   const parems = GetParams(account_entry.PostMarkAsFavorite);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.PostMarkAsFavorite()).toBe(answer);
-//   });
-// });
-// test('account.GetRatedMovies', () => {
-//   const parems = GetParams(account_entry.GetRatedMovies);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetRatedMovies()).toBe(answer);
-//   });
-// });
-// test('account.GetRatedTVShows', () => {
-//   const parems = GetParams(account_entry.GetRatedTVShows);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetRatedTVShows()).toBe(answer);
-//   });
-// });
-// test('account.GetRatedTVEpisodes', () => {
-//   const parems = GetParams(account_entry.GetRatedTVEpisodes);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetRatedTVEpisodes()).toBe(answer);
-//   });
-// });
-// test('account.GetMovieWatchlist', () => {
-//   const parems = GetParams(account_entry.GetMovieWatchlist);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetMovieWatchlist()).toBe(answer);
-//   });
-// });
-// test('account.GetTVShowWatchlist', () => {
-//   const parems = GetParams(account_entry.GetTVShowWatchlist);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.GetTVShowWatchlist()).toBe(answer);
-//   });
-// });
-// test('account.PostAddToWatchlist', () => {
-//   const parems = GetParams(account_entry.PostAddToWatchlist);
-//   const cases = [];
-//   cases.forEach(async element => {
-//     const answer = GetReturnString(`${URL}`, parems, element);
-//     expect(await account_entry.PostAddToWatchlist()).toBe(answer);
-//   });
-// });
+describe('Get URLs that funciton request: Account', () => {
+  test('account.GetDetails', () => {
+    const parems = GetParams(account_entry.GetDetails);
+    const cases = [
+      {
+        session_id: 454866321,
+      },
+      {
+        session_id: 866321,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + c_module.Route.ACCOUNT,
+        parems,
+        element
+      );
+      expect(await account_entry.GetDetails(element.session_id)).toBe(answer);
+    });
+  });
+  test('account.GetCreatedLists', () => {
+    const parems = GetParams(account_entry.GetCreatedLists);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/lists',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetCreatedLists(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.GetFavoriteMovies', () => {
+    const parems = GetParams(account_entry.GetFavoriteMovies);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+        sort_by: 'created_at.asc',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        sort_by: 'created_at.asc',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/favorite/movies',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetFavoriteMovies(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.sort_by,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.GetFavoriteTVShows', () => {
+    const parems = GetParams(account_entry.GetFavoriteTVShows);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+        sort_by: 'created_at.asc',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        sort_by: 'created_at.asc',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/favorite/tv/',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetFavoriteTVShows(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.sort_by,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.PostMarkAsFavorite', () => {
+    const parems = GetParams(account_entry.PostMarkAsFavorite);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/favorite',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.PostMarkAsFavorite(
+          {},
+          element.account_id,
+          element.session_id
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.GetRatedMovies', () => {
+    const parems = GetParams(account_entry.GetRatedMovies);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+        sort_by: 'created_at.asc',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        sort_by: 'created_at.asc',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/rated/movies',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetRatedMovies(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.sort_by,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.GetRatedTVShows', () => {
+    const parems = GetParams(account_entry.GetRatedTVShows);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+        sort_by: 'created_at.asc',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        sort_by: 'created_at.asc',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/rated/tv',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetRatedTVShows(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.sort_by,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.GetRatedTVEpisodes', () => {
+    const parems = GetParams(account_entry.GetRatedTVEpisodes);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+        sort_by: 'created_at.asc',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        sort_by: 'created_at.asc',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/rated/tv/episodes',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetRatedTVEpisodes(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.sort_by,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.GetMovieWatchlist', () => {
+    const parems = GetParams(account_entry.GetMovieWatchlist);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+        sort_by: 'created_at.asc',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        sort_by: 'created_at.asc',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + 'account/{account_id}/watchlist/movies',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetMovieWatchlist(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.sort_by,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.GetTVShowWatchlist', () => {
+    const parems = GetParams(account_entry.GetTVShowWatchlist);
+    const cases = [
+      {
+        account_id: 531846,
+        session_id: 'hrhe',
+        sort_by: 'created_at.asc',
+      },
+      {
+        account_id: 5314,
+        session_id: 'awxfghdthrth',
+        language: 'en_US',
+        sort_by: 'created_at.asc',
+        page: undefined,
+      },
+      {
+        account_id: 5314,
+        session_id: 'dfgrthrtgwe',
+        language: undefined,
+        page: 654,
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + '' + 'account/{account_id}/watchlist/tv',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.GetTVShowWatchlist(
+          element.account_id,
+          element.session_id,
+          element.language,
+          element.sort_by,
+          element.page
+        )
+      ).toBe(answer);
+    });
+  });
+  test('account.PostAddToWatchlist', () => {
+    const parems = GetParams(account_entry.PostAddToWatchlist);
+    const cases = [
+      {
+        account_id: '31561',
+        session_id: '548941368',
+      },
+      {
+        account_id: 548941368,
+        session_id: '541368',
+      },
+    ];
+    cases.forEach(async element => {
+      const answer = GetReturnString(
+        `${URL}` + '' + 'account/{account_id}/watchlist',
+        parems,
+        element
+      );
+      expect(
+        await account_entry.PostAddToWatchlist(
+          {},
+          element.account_id,
+          element.session_id
+        )
+      ).toBe(answer);
+    });
+  });
+});
+
 // test('authentication.GetCreateGuestSession', () => {
 //   const parems = GetParams(authentication_entry.GetCreateGuestSession);
 //   const cases = [];

@@ -919,11 +919,11 @@ export namespace TV {
 export namespace Account {
   /********************
    * 1.Get your account details.
-   * @param {string} session_id
+   * @param {string|number} session_id
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-account-details
    ********************/
-  export function GetDetails(session_id: string) {
+  export function GetDetails(session_id: string | number) {
     return Validator.ACCOUNTGetDetails(session_id);
   }
   /********************
