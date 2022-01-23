@@ -2,8 +2,8 @@
   "name": "wraptmdb-ts",
   "version": "1.0.0",
   "description": "WrapTMDB-ts is a wrapper tool for TMDB.",
-  "main": "build/src/wrapTMDB.js",
-  "types": "build/src/wrapTMDB.d.ts",
+  "main": "publish/src/wrapTMDB.js",
+  "types": "publish/src/wrapTMDB.d.ts",
   "files": [
     "publish/**/*.d.ts",
     "publish/**/*.js",
