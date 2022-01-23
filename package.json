@@ -10,7 +10,7 @@
     "publish/**/*.js.map"
   ],
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["nodejs","typescript","tmdb","tmdb-movie-search","wrapper-api","tmdb-api","hacktoberfest"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wrapTMDB/wrapTMDB-ts.git"
