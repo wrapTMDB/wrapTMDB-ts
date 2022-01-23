@@ -23,6 +23,9 @@ export class Network {
     const header = c_module.GetHeader();
     const targetURL: string =
       baseURL + c_module.Route.NETWORK + `${network_id}` + `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -42,6 +45,9 @@ export class Network {
       `${network_id}` +
       '/alternative_names' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -61,6 +67,9 @@ export class Network {
       `${network_id}` +
       '/images' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

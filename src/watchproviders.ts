@@ -23,8 +23,11 @@ export class Watchproviders {
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.WATCHPROVIDERS + 'regions' + `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -48,10 +51,13 @@ export class Watchproviders {
       c_module.Route.WATCHPROVIDERS +
       c_module.Route.MOVIE +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (watch_region !== '' || watch_region !== undefined)
+    if (watch_region !== '' && watch_region !== undefined)
       targetURL += `&watch_region=${watch_region}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -72,10 +78,13 @@ export class Watchproviders {
       c_module.Route.WATCHPROVIDERS +
       c_module.Route.TV +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (watch_region !== '' || watch_region !== undefined)
+    if (watch_region !== '' && watch_region !== undefined)
       targetURL += `&watch_region=${watch_region}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

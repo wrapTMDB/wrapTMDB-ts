@@ -30,8 +30,11 @@ export class Collections {
       c_module.Route.COLLECTION +
       `${collection_id}` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -55,8 +58,11 @@ export class Collections {
       `${collection_id}` +
       '/images' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -80,8 +86,11 @@ export class Collections {
       `${collection_id}` +
       '/translations' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

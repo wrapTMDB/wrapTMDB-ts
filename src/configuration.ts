@@ -29,6 +29,9 @@ export class Configuration {
     const targetURL: string =
       baseURL + c_module.Route.CONFIGURATION + `?api_key=${token}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -44,8 +47,11 @@ export class Configuration {
     const targetURL: string =
       baseURL +
       c_module.Route.CONFIGURATION +
-      '/countries' +
+      'countries' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -59,7 +65,10 @@ export class Configuration {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     const targetURL: string =
-      baseURL + c_module.Route.CONFIGURATION + '/jobs' + `?api_key=${token}`;
+      baseURL + c_module.Route.CONFIGURATION + 'jobs' + `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -75,8 +84,11 @@ export class Configuration {
     const targetURL: string =
       baseURL +
       c_module.Route.CONFIGURATION +
-      '/languages' +
+      'languages' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -92,8 +104,11 @@ export class Configuration {
     const targetURL: string =
       baseURL +
       c_module.Route.CONFIGURATION +
-      '/primary_translations' +
+      'primary_translations' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -110,8 +125,11 @@ export class Configuration {
     const targetURL: string =
       baseURL +
       c_module.Route.CONFIGURATION +
-      '/timezones' +
+      'timezones' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

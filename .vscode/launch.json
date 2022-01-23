@@ -9,7 +9,7 @@
                 "<node_internals>/**"
             ],
             "program": "${file}",
-            "preLaunchTask": "dev",
+            "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/build/**/*.js"
             ]

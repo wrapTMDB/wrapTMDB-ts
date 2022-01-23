@@ -60,7 +60,6 @@ const tvseasons_entry = new tvseasons_module.TVseason();
 const watchproviders_entry = new watchproviders_module.Watchproviders();
 const Validator = new Proxy(
   {
-    GetToken: GetToken,
     //#region Movie:23
     MOVIEGetDetails: movie_entry.GetDetails,
     MOVIEGetAccountStates: movie_entry.GetAccountStates,
@@ -68,7 +67,7 @@ const Validator = new Proxy(
     MOVIEGetChanges: movie_entry.GetChanges,
     MOVIEGetCredits: movie_entry.GetCredits,
     MOVIEGetExternalIDs: movie_entry.GetExternalIDs,
-    MOVIEGetImage: movie_entry.GetImage,
+    MOVIEGetImage: movie_entry.GetImages,
     MOVIEGetKeywords: movie_entry.GetKeywords,
     MOVIEGetLists: movie_entry.GetLists,
     MOVIEGetRecommendations: movie_entry.GetRecommendations,
@@ -289,7 +288,13 @@ export function Init(token: string) {
  * @returns {string} Common.TOKEN
  ********************/
 export function GetToken(): string {
-  return Validator.GetToken();
+  const result = c_module.GetToken();
+  if (result === '') {
+    throw new Error(
+      'Error: non-TOKEN, Call "Init" function at first before calling other functions'
+    );
+  }
+  return result;
 }
 /********************
  * Header: Set HTTP header, it's optional, but should have it.
@@ -315,10 +320,7 @@ export namespace Movies {
    *          wraptmdb.MOVIE.GetDetails(624860,'en-US');
    * @doc https://developers.themoviedb.org/3/movies/get-movie-details
    ********************/
-  export function GetDetails(
-    movie_id: number | string,
-    language?: string
-  ): any {
+  export function GetDetails(movie_id: number | string, language?: string) {
     return Validator.MOVIEGetDetails(movie_id, language);
   }
   /********************
@@ -917,11 +919,11 @@ export namespace TV {
 export namespace Account {
   /********************
    * 1.Get your account details.
-   * @param {string} session_id
+   * @param {string|number} session_id
    * @returns {any} JSON
    * @doc https://developers.themoviedb.org/3/account/get-account-details
    ********************/
-  export function GetDetails(session_id: string) {
+  export function GetDetails(session_id: string | number) {
     return Validator.ACCOUNTGetDetails(session_id);
   }
   /********************
@@ -1667,10 +1669,10 @@ export namespace Lists {
    ********************/
   export function PostClearList(
     list_id: number | string,
-    confirm: boolean,
-    session_id: number | string
+    session_id: number | string,
+    confirm: boolean
   ) {
-    return Validator.LISTSPostClearList(list_id, confirm, session_id);
+    return Validator.LISTSPostClearList(list_id, session_id, confirm);
   }
   /********************
    * 7.Delete  a list.
@@ -2059,7 +2061,7 @@ export namespace TVseasons {
   export function GetAccountStates(
     tv_id: number | string,
     season_number: number | string,
-    session_id?: string,
+    session_id: string,
     guest_session_id?: string,
     language?: string
   ) {
@@ -2111,7 +2113,7 @@ export namespace TVseasons {
   /********************
    * 5.Get the credits for TV season.
    * @param {number|string} tv_id
-   * @param {number|string} season_id
+   * @param {number|string} season_number
    * @param {string} language (optional)
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-credits

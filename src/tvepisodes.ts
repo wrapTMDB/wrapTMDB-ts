@@ -37,13 +37,16 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (append_to_response !== '' || append_to_response !== undefined)
+    if (append_to_response !== '' && append_to_response !== undefined)
       targetURL += `&append_to_response=${append_to_response}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -73,14 +76,17 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}/` +
       'account_states' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
+    if (guest_session_id !== '' && guest_session_id !== undefined)
       targetURL += `&guest_session_id=${guest_session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -106,16 +112,19 @@ export class TVEpisodes {
     let targetURL: string =
       baseURL +
       c_module.Route.TV +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_id}` +
       '/changes' +
       `?api_key=${token}`;
-    if (start_date !== '' || start_date !== undefined)
+    if (start_date !== '' && start_date !== undefined)
       targetURL += `&start_date=${start_date}`;
-    if (end_date !== '' || end_date !== undefined)
-      targetURL += `&end_date=${start_date}`;
+    if (end_date !== '' && end_date !== undefined)
+      targetURL += `&end_date=${end_date}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -143,13 +152,16 @@ export class TVEpisodes {
       c_module.Route.TV +
       `${tv_id}/` +
       'season/' +
-      `${season_number}` +
-      '/episode' +
+      `${season_number}/` +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       '/credits' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -175,10 +187,13 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       '/external_ids' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -204,11 +219,14 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       '/images' +
       `?api_key=${token}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -234,11 +252,14 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       '/translations' +
       `?api_key=${token}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -273,15 +294,18 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       '/rating' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
+    if (guest_session_id !== '' && guest_session_id !== undefined)
       targetURL += `&guest_session_id=${guest_session_id}`;
-    if (session_id !== '' || session_id !== undefined)
-      targetURL += `&end_date=${session_id}`;
+    if (session_id !== '' && session_id !== undefined)
+      targetURL += `&session_id=${session_id}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.post(targetURL, query, header);
     return data.data;
   }
@@ -300,8 +324,8 @@ export class TVEpisodes {
     tv_id: number | string,
     season_number: number | string,
     episode_number: number | string,
-    guest_session_id?: string,
-    session_id?: string
+    session_id?: string,
+    guest_session_id?: string
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -311,15 +335,18 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       '/rating' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
+    if (guest_session_id !== '' && guest_session_id !== undefined)
       targetURL += `&guest_session_id=${guest_session_id}`;
-    if (session_id !== '' || session_id !== undefined)
-      targetURL += `&end_date=${session_id}`;
+    if (session_id !== '' && session_id !== undefined)
+      targetURL += `&session_id=${session_id}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.delete(targetURL, {}, header);
     return data.data;
   }
@@ -347,12 +374,15 @@ export class TVEpisodes {
       `${tv_id}/` +
       'season/' +
       `${season_number}/` +
-      'episode/' +
+      c_module.Route.EPISODE +
       `${episode_number}` +
       '/videos' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

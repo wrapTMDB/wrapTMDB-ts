@@ -29,6 +29,10 @@ export class Movie {
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
+
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -57,10 +61,16 @@ export class Movie {
       movie_id +
       '/account_states' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -84,8 +94,11 @@ export class Movie {
       movie_id +
       '/alternative_titles' +
       `?api_key=${token}`;
-    if (country !== '' || country !== undefined)
+    if (country !== '' && country !== undefined)
       targetURL += `&country=${country}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -114,12 +127,15 @@ export class Movie {
       movie_id +
       '/changes' +
       `?api_key=${token}`;
-    if (start_date !== '' || start_date !== undefined)
+    if (start_date !== '' && start_date !== undefined)
       targetURL += `&start_date=${start_date}`;
-    if (end_date !== '' || end_date !== undefined)
-      targetURL += `&end_date=${start_date}`;
+    if (end_date !== '' && end_date !== undefined)
+      targetURL += `&end_date=${end_date}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -145,6 +161,9 @@ export class Movie {
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -164,6 +183,9 @@ export class Movie {
       movie_id +
       '/external_ids' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -179,7 +201,7 @@ export class Movie {
    * @param {string} include_image_language (optional)
    * @doc https://developers.themoviedb.org/3/movies/get-movie-images
    ********************/
-  async GetImage(
+  async GetImages(
     movie_id: number | string,
     language?: string,
     include_image_language?: string
@@ -197,6 +219,9 @@ export class Movie {
     }
     if (include_image_language !== undefined) {
       targetURL += `&include_image_language=${include_image_language}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -217,6 +242,9 @@ export class Movie {
       movie_id +
       '/keywords' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -248,6 +276,9 @@ export class Movie {
     if (page !== undefined) {
       targetURL += `&page=${page}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -278,6 +309,9 @@ export class Movie {
     if (page !== undefined) {
       targetURL += `&page=${page}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -303,6 +337,9 @@ export class Movie {
       movie_id +
       '/release_dates' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -332,6 +369,9 @@ export class Movie {
     }
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -364,6 +404,9 @@ export class Movie {
     if (page !== undefined) {
       targetURL += `&page=${page}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -383,6 +426,9 @@ export class Movie {
       movie_id +
       '/translations' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -405,6 +451,9 @@ export class Movie {
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -425,6 +474,9 @@ export class Movie {
       movie_id +
       '/watch/providers' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -454,14 +506,17 @@ export class Movie {
       movie_id +
       '/rating' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
     const header = {
       api_key: token,
     };
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.POST(targetURL, query, header);
     return data.data;
   }
@@ -488,11 +543,15 @@ export class Movie {
       movie_id +
       '/rating' +
       `?api_key=${token}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
-    await axios.delete(targetURL, header);
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
+    const data = await axios.delete(targetURL, header);
+    return data;
     /*no respone*/
   }
   /********************
@@ -506,9 +565,12 @@ export class Movie {
     const header = c_module.GetHeader();
     const baseURL = c_module.GetURL();
     let targetURL: string =
-      baseURL + c_module.Route.MOVIE + '/latest' + `?api_key=${token}`;
+      baseURL + c_module.Route.MOVIE + 'latest' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -532,7 +594,7 @@ export class Movie {
     const header = c_module.GetHeader();
     const baseURL = c_module.GetURL();
     let targetURL: string =
-      baseURL + c_module.Route.MOVIE + '/now_playing' + `?api_key=${token}`;
+      baseURL + c_module.Route.MOVIE + 'now_playing' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
@@ -541,6 +603,9 @@ export class Movie {
     }
     if (region !== undefined) {
       targetURL += `&region=${region}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -562,7 +627,7 @@ export class Movie {
     const header = c_module.GetHeader();
     const baseURL = c_module.GetURL();
     let targetURL: string =
-      baseURL + c_module.Route.MOVIE + '/now_playing' + `?api_key=${token}`;
+      baseURL + c_module.Route.MOVIE + 'popular' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
@@ -571,6 +636,9 @@ export class Movie {
     }
     if (region !== undefined) {
       targetURL += `&region=${region}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -592,7 +660,7 @@ export class Movie {
     const header = c_module.GetHeader();
     const baseURL = c_module.GetURL();
     let targetURL: string =
-      baseURL + c_module.Route.MOVIE + '/top_rated' + `?api_key=${token}`;
+      baseURL + c_module.Route.MOVIE + 'top_rated' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
@@ -601,6 +669,9 @@ export class Movie {
     }
     if (region !== undefined) {
       targetURL += `&region=${region}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -624,7 +695,7 @@ export class Movie {
     const header = c_module.GetHeader();
     const baseURL = c_module.GetURL();
     let targetURL: string =
-      baseURL + c_module.Route.MOVIE + '/upcoming' + `?api_key=${token}`;
+      baseURL + c_module.Route.MOVIE + 'upcoming' + `?api_key=${token}`;
     if (language !== undefined) {
       targetURL += `&language=${language}`;
     }
@@ -633,6 +704,9 @@ export class Movie {
     }
     if (region !== undefined) {
       targetURL += `&region=${region}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;

@@ -13,7 +13,7 @@ const baseURL = c_module.GetURL();
 
 export class Find {
   /********************
-   * 1.GET /person/changes
+   * 1.GET /find/{external_id}
    * @description The find method makes it easy to search for objects in TMDB database by an external id.
    * @param {number|string} external_id
    * @param {string} external_source (default: imdb_id)
@@ -30,10 +30,13 @@ export class Find {
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.FIND + `${external_id}` + `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
     if (external_source !== undefined) {
       targetURL += `&external_source=${external_source}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;

@@ -23,6 +23,9 @@ export class Companies {
     const header = c_module.GetHeader();
     const targetURL: string =
       baseURL + c_module.Route.COMPANY + `${company_id}` + `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -36,10 +39,15 @@ export class Companies {
   async GetAlternativeNames(company_id: number | string): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
-    let targetURL: string = baseURL + c_module.Route.COMPANY;
-    targetURL += +`${company_id}/`;
-    targetURL += +'alternative_names';
-    targetURL += `?api_key=${token}`;
+    const targetURL: string =
+      baseURL +
+      c_module.Route.COMPANY +
+      `${company_id}` +
+      '/alternative_names' +
+      `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -59,6 +67,9 @@ export class Companies {
       `${company_id}` +
       '/images' +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
