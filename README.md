@@ -25,7 +25,7 @@ It helps developer to request Movies or TV shows for infomation and metadata.<br
 This repo written by Typescript and publich in npm,<br/>
 see more  [here](https://github.com/wrapTMDB/wrapTMDB).
 ___
-## What kinds of project are appropriated using with?
+## What kinds of projects are appropriated using with?
 
 - If you want to make a client to track new movies infomation.
 - If you want to make a tool helping you to manage your movie files or videos.
