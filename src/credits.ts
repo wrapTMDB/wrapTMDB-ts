@@ -24,6 +24,9 @@ export class Credits {
     const header = c_module.GetHeader();
     const targetURL: string =
       baseURL + c_module.Route.CREDIT + `${credit_id}` + `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

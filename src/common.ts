@@ -38,6 +38,7 @@ export const Route = {
   PEOPLE: 'person/',
   REVIEWS: 'reviews/',
   SEARCH: 'search/',
+  EPISODE: 'episode/',
   EPISODEGROUPS: 'episode_group/',
   WATCHPROVIDERS: 'watch/providers/',
 };

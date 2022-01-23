@@ -1669,10 +1669,10 @@ export namespace Lists {
    ********************/
   export function PostClearList(
     list_id: number | string,
-    confirm: boolean,
-    session_id: number | string
+    session_id: number | string,
+    confirm: boolean
   ) {
-    return Validator.LISTSPostClearList(list_id, confirm, session_id);
+    return Validator.LISTSPostClearList(list_id, session_id, confirm);
   }
   /********************
    * 7.Delete  a list.
@@ -2061,7 +2061,7 @@ export namespace TVseasons {
   export function GetAccountStates(
     tv_id: number | string,
     season_number: number | string,
-    session_id?: string,
+    session_id: string,
     guest_session_id?: string,
     language?: string
   ) {
@@ -2113,7 +2113,7 @@ export namespace TVseasons {
   /********************
    * 5.Get the credits for TV season.
    * @param {number|string} tv_id
-   * @param {number|string} season_id
+   * @param {number|string} season_number
    * @param {string} language (optional)
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-credits

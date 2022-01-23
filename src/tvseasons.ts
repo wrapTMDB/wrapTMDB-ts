@@ -36,10 +36,13 @@ export class TVseason {
       'season/' +
       `${season_number}` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (append_to_response !== '' || append_to_response !== undefined)
+    if (append_to_response !== '' && append_to_response !== undefined)
       targetURL += `&append_to_response=${append_to_response}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -52,14 +55,14 @@ export class TVseason {
    * @param {string} guest_session_id (optional)
    * @param {string} language (optional)
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-account-states
    ********************/
   async GetAccountStates(
     tv_id: number | string,
     season_number: number | string,
-    session_id?: string,
-    guest_session_id?: string,
-    language?: string
+    session_id: string,
+    language?: string,
+    guest_session_id?: string
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
@@ -71,12 +74,15 @@ export class TVseason {
       `${season_number}` +
       '/account_states' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
-      targetURL += `&language=${language}`;
-    if (guest_session_id !== '' || guest_session_id !== undefined)
-      targetURL += `&guest_session_id=${guest_session_id}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (language !== '' && language !== undefined)
+      targetURL += `&language=${language}`;
+    if (guest_session_id !== '' && guest_session_id !== undefined)
+      targetURL += `&guest_session_id=${guest_session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -104,13 +110,16 @@ export class TVseason {
       `${season_number}` +
       '/aggregate_credits' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
   /********************
-   * 4.GET /tv/{tv_id}/season/{season_id}/changes
+   * 4.GET /tv/season/{season_id}/changes
    * @description Get the changes for a TV season. By default only the last 24 hours are returned.
    * @param {number|string} season_id
    * @param {string} start_date (optional)
@@ -134,12 +143,15 @@ export class TVseason {
       `${season_id}` +
       '/changes' +
       `?api_key=${token}`;
-    if (start_date !== '' || start_date !== undefined)
+    if (start_date !== '' && start_date !== undefined)
       targetURL += `&start_date=${start_date}`;
-    if (end_date !== '' || end_date !== undefined)
-      targetURL += `&end_date=${start_date}`;
+    if (end_date !== '' && end_date !== undefined)
+      targetURL += `&end_date=${end_date}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -148,7 +160,7 @@ export class TVseason {
    * 5.GET /tv/{tv_id}/season/{season_number}/credits
    * @description Get the credits for TV season.
    * @param {number|string} tv_id
-   * @param {number|string} season_id
+   * @param {number|string} season_number
    * @param {string} language (optional)
    * @returns JSON
    * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-credits
@@ -168,8 +180,11 @@ export class TVseason {
       `${season_number}` +
       '/credits' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -197,8 +212,11 @@ export class TVseason {
       `${season_number}` +
       '/external_ids' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -226,8 +244,11 @@ export class TVseason {
       `${season_number}` +
       '/images' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -255,13 +276,16 @@ export class TVseason {
       `${season_number}` +
       '/translations' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
   /********************
-   * 9.GET /tv/{tv_id}/season/{season_id}/videos
+   * 9.GET /tv/{tv_id}/season/{season_number}/videos
    * @description Get the videos that have been added to a TV season.
    * @param {number|string} tv_id
    * @param {number|string} season_number
@@ -284,8 +308,11 @@ export class TVseason {
       `${season_number}` +
       '/videos' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

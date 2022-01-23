@@ -25,6 +25,9 @@ export class KeyWords {
     const targetURL: string =
       baseURL + c_module.Route.KEYWORD + `${keyword_id}` + `?api_key=${token}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -51,10 +54,13 @@ export class KeyWords {
       `${keyword_id}/` +
       'movies' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
     if (include_adult !== undefined) {
       targetURL += `&include_adult=${include_adult}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;

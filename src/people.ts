@@ -28,10 +28,13 @@ export class People {
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.PEOPLE + `${person_id}` + `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (append_to_response !== '' || append_to_response !== undefined)
+    if (append_to_response !== '' && append_to_response !== undefined)
       targetURL += `&append_to_response=${append_to_response}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -58,11 +61,14 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/changes` +
       `?api_key=${token}`;
-    if (start_date !== '' || start_date !== undefined)
+    if (start_date !== '' && start_date !== undefined)
       targetURL += `&start_date=${start_date}`;
-    if (end_date !== '' || end_date !== undefined)
-      targetURL += `&end_date=${start_date}`;
+    if (end_date !== '' && end_date !== undefined)
+      targetURL += `&end_date=${end_date}`;
     if (page !== undefined) targetURL += `&page=${page}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -85,8 +91,11 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/movie_credits` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -109,8 +118,11 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/tv_credits` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -133,8 +145,11 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/combined_credits` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -157,8 +172,11 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/external_ids` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -177,6 +195,9 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/images` +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -201,10 +222,13 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/tagged_images` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;
@@ -228,8 +252,11 @@ export class People {
       c_module.Route.PEOPLE +
       `${person_id}/translations` +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -245,8 +272,11 @@ export class People {
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.PEOPLE + 'latest' + `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -263,10 +293,13 @@ export class People {
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.PEOPLE + 'popular' + `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
     if (page !== undefined) {
       targetURL += `&page=${page}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.get(targetURL, header);
     return data.data;

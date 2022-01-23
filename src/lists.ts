@@ -25,8 +25,11 @@ export class Lists {
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.LIST + `${list_id}` + `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -50,8 +53,11 @@ export class Lists {
       `${list_id}/` +
       'item_status' +
       `?api_key=${token}`;
-    if (movie_id !== '' || movie_id !== undefined)
+    if (movie_id !== '' && movie_id !== undefined)
       targetURL += `&movie_id=${movie_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -72,8 +78,11 @@ export class Lists {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string = baseURL + c_module.Route.LIST + `?api_key=${token}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.post(targetURL, query, header);
     return data.data;
   }
@@ -101,8 +110,11 @@ export class Lists {
       c_module.Route.LIST +
       `${list_id}/add_item` +
       `?api_key=${token}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.post(targetURL, query, header);
     return data.data;
   }
@@ -130,8 +142,11 @@ export class Lists {
       c_module.Route.LIST +
       `${list_id}/remove_item` +
       `?api_key=${token}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.post(targetURL, query, header);
     return data.data;
   }
@@ -146,24 +161,27 @@ export class Lists {
    ********************/
   async PostClearList(
     list_id: number | string,
-    confirm: boolean,
-    session_id: number | string
+    session_id: number | string,
+    confirm: boolean
   ): Promise<any> {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
       baseURL + c_module.Route.LIST + `${list_id}/clear` + `?api_key=${token}`;
-    if (session_id !== '' || session_id !== undefined)
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
     if (confirm !== undefined) {
       targetURL += `&confirm=${confirm}`;
+    }
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
     }
     const data: any = await axios.post(targetURL, {}, header);
     return data.data;
   }
   /********************
    * 7.DELETE /list/{list_id}
-   * @description Delete  a list.
+   * @description Delete a list.
    * @param {number|string} list_id
    * @param {number|string} session_id
    * @returns JSON
@@ -176,10 +194,13 @@ export class Lists {
     const token = c_module.GetToken();
     const header = c_module.GetHeader();
     let targetURL: string =
-      baseURL + c_module.Route.LIST + `${list_id}/` + `?api_key=${token}`;
-    if (session_id !== '' || session_id !== undefined)
+      baseURL + c_module.Route.LIST + `${list_id}` + `?api_key=${token}`;
+    if (session_id !== '' && session_id !== undefined)
       targetURL += `&session_id=${session_id}`;
 
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.delete(targetURL, {}, header);
     return data.data;
   }

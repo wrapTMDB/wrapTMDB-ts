@@ -28,8 +28,11 @@ export class Trending {
       baseURL +
       c_module.Route.TRENDING +
       `${media_type}/` +
-      `${time_window}/` +
+      `${time_window}` +
       `?api_key=${token}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }

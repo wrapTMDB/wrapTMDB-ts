@@ -22,7 +22,7 @@ export class GuestSessions {
    * @doc https://developers.themoviedb.org/3/guest-sessions/get-guest-session-rated-movies
    ********************/
   async GetRatedMovies(
-    guest_session_id: string,
+    guest_session_id: string | number,
     language?: string,
     sort_by?: string
   ): Promise<any> {
@@ -34,10 +34,13 @@ export class GuestSessions {
       `${guest_session_id}/` +
       'rated/movies' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (sort_by !== '' || sort_by !== undefined)
+    if (sort_by !== '' && sort_by !== undefined)
       targetURL += `&sort_by=${sort_by}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -51,7 +54,7 @@ export class GuestSessions {
    * @doc https://developers.themoviedb.org/3/guest-sessions/get-guest-session-rated-tv-shows
    ********************/
   async GetRatedTVShows(
-    guest_session_id: string,
+    guest_session_id: string | number,
     language?: string,
     sort_by?: string
   ): Promise<any> {
@@ -63,10 +66,13 @@ export class GuestSessions {
       `${guest_session_id}/` +
       'rated/tv' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (sort_by !== '' || sort_by !== undefined)
+    if (sort_by !== '' && sort_by !== undefined)
       targetURL += `&sort_by=${sort_by}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
@@ -80,7 +86,7 @@ export class GuestSessions {
    * @doc https://developers.themoviedb.org/3/guest-sessions/get-guest-session-rated-tv-shows
    ********************/
   async GetRatedTVEpisodes(
-    guest_session_id: string,
+    guest_session_id: string | number,
     language?: string,
     sort_by?: string
   ): Promise<any> {
@@ -92,10 +98,13 @@ export class GuestSessions {
       `${guest_session_id}/` +
       'rated/tv/episodes' +
       `?api_key=${token}`;
-    if (language !== '' || language !== undefined)
+    if (language !== '' && language !== undefined)
       targetURL += `&language=${language}`;
-    if (sort_by !== '' || sort_by !== undefined)
+    if (sort_by !== '' && sort_by !== undefined)
       targetURL += `&sort_by=${sort_by}`;
+    if (token === 'UnitTest_api_key') {
+      return targetURL;
+    }
     const data: any = await axios.get(targetURL, header);
     return data.data;
   }
