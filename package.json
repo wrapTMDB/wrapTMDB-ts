@@ -1,7 +1,7 @@
 {
   "name": "wraptmdb-ts",
   "version": "1.0.1",
-  "description": "WrapTMDB-ts is a wrapper tool for TMDB.",
+  "description": "wrapTMDB-ts is a wrapper lib for implementing TMDB API from doc. To request Movies and TV-shows informations from TMDB.",
   "main": "publish/src/wrapTMDB.js",
   "types": "publish/src/wrapTMDB.d.ts",
   "files": [
@@ -10,7 +10,7 @@
     "publish/**/*.js.map"
   ],
   "license": "MIT",
-  "keywords": ["nodejs","typescript","tmdb","tmdb-movie-search","wrapper-api","tmdb-api","hacktoberfest"],
+  "keywords": ["typescript","npm-package","tmdb","wrapper-api","tmdb-api","hacktoberfest"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wrapTMDB/wrapTMDB-ts.git"
