@@ -1,6 +1,6 @@
 {
   "name": "wraptmdb-ts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "wrapTMDB-ts is a wrapper lib for implementing TMDB API from doc. To request Movies and TV-shows informations from TMDB.",
   "main": "publish/src/wrapTMDB.js",
   "types": "publish/src/wrapTMDB.d.ts",
