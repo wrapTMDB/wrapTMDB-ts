@@ -280,8 +280,10 @@ const Validator = new Proxy(
  * Init: must call Init function first before using any other functions, or all func throw errors.
  * @param {string}token  enter your_token
  ********************/
-export function Init(token: string) {
-  c_module.SetToken(token);
+export function Init(token: string | undefined) {
+  if (token !== '' && token !== undefined) {
+    c_module.SetToken(token);
+  }
 }
 /********************
  * Debug: get TOKEN
