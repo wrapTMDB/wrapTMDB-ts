@@ -162,9 +162,9 @@ function StringByQuery(query: any): string {
   let result = '';
   const attributes = Object.keys(query);
   attributes.forEach(key => {
-    `&${key}=` + query[key];
+    result += `&${key}=` + query[key];
   });
-  result += '';
+
   return result;
 }
 
