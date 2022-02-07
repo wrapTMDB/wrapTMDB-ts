@@ -37,7 +37,7 @@ export class Genres {
     return data.data;
   }
   /********************
-   * 2.GET /genre/movie/list
+   * 2.GET /genre/tv/list
    * @description Get the list of official genres for TV shows.
    * @param {string} language (optional)
    * @returns JSON

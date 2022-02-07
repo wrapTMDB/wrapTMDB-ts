@@ -34,7 +34,7 @@ export class Companies {
    * @description Get the alternative names of a company.
    * @param {number|string} company_id
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/companies/get-company-details
+   * @doc https://developers.themoviedb.org/3/companies/get-company-alternative-names
    ********************/
   async GetAlternativeNames(company_id: number | string): Promise<any> {
     const token = c_module.GetToken();
@@ -56,7 +56,7 @@ export class Companies {
    * @description Get a companies logos by id.
    * @param {number|string} company_id
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/companies/get-company-details
+   * @doc https://developers.themoviedb.org/3/companies/get-company-images
    ********************/
   async GetImages(company_id: number | string): Promise<any> {
     const token = c_module.GetToken();

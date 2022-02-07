@@ -83,7 +83,7 @@ export class GuestSessions {
    * @param {string} language (optional)
    * @param {string} sort_by (optional) "created_at.asc" or "created_at.desc"
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/guest-sessions/get-guest-session-rated-tv-shows
+   * @doc https://developers.themoviedb.org/3/guest-sessions/get-gest-session-rated-tv-episodes
    ********************/
   async GetRatedTVEpisodes(
     guest_session_id: string | number,

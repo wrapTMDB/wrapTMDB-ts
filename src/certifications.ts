@@ -34,9 +34,9 @@ export class Certifications {
   }
   /********************
    * 2.GET /certification/tv/list
-   * @description Get your account details.
+   * @description Get an up to date list of the officially supported TV show certifications on TMDB.
    * @returns {any} JSON
-   * @doc https://developers.themoviedb.org/3/account/get-account-details
+   * @doc https://developers.themoviedb.org/3/certifications/get-tv-certifications
    ********************/
   async GetTVCertifications(): Promise<any> {
     const token = c_module.GetToken();

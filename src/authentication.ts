@@ -125,7 +125,7 @@ export class Authentication {
    * @example query{
    *    "session_id": "2629f70fb498edc263a0adb99118ac41f0053e8c"
    * }
-   * @doc https://developers.themoviedb.org/3/account/get-account-details
+   * @doc https://developers.themoviedb.org/3/authentication/delete-session
    ********************/
   async DeleteDeleteSession(query: any): Promise<any> {
     const token = c_module.GetToken();

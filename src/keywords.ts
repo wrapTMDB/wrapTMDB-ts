@@ -39,7 +39,7 @@ export class KeyWords {
    * @param {number|string} language(optional)
    * @param {boolean} include_adult(optional)
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/keywords/get-keyword-details
+   * @doc https://developers.themoviedb.org/3/keywords/get-movies-by-keyword
    ********************/
   async GetMovies(
     keyword_id: number | string,

@@ -190,12 +190,12 @@ export class TVseason {
   }
   /********************
    * 6.GET /tv/{tv_id}/season/{season_number}/external_ids
-   * @description Get the TV season details by id.
+   * @description Get the external ids for a TV season. We currently support the following external sources.
    * @param {number|string} tv_id
    * @param {number|string} season_number
    * @param {string} language (optional)
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
+   * @doc https://developers.themoviedb.org/3/tv-seasons/get-tv-season-external-ids
    ********************/
   async GetExternalIDs(
     tv_id: number | string,

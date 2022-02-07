@@ -157,7 +157,7 @@ export class Lists {
    * @param {number|string} session_id
    * @param {boolean} confirm
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/lists/create-list
+   * @doc https://developers.themoviedb.org/3/lists/clear-list
    ********************/
   async PostClearList(
     list_id: number | string,

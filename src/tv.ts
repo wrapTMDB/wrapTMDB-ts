@@ -198,7 +198,7 @@ export class TV {
    * @param {number|string} tv_id  TV ID in TMDB
    * @param {string} language(optional)  Language to request
    * @returns JSON
-   * @doc https://developers.themoviedb.org/3/movies/get-movie-changes
+   * @doc https://developers.themoviedb.org/3/movies/get-movie-credits
    ********************/
   async GetCredits(tv_id: number | string, language?: string): Promise<any> {
     const token = c_module.GetToken();
